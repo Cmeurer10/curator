@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :courses_taken, through: :enrollments, source: :course
   has_many :posts, dependent: :nullify
   has_many :curatorships, dependent: :nullify
-  has_many :enrollments:, dependent: :destroy
+  has_many :enrollments, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :first_name, presence: true

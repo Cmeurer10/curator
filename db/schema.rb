@@ -27,9 +27,12 @@ ActiveRecord::Schema.define(version: 20170717045340) do
   end
 
   create_table "conversations", force: :cascade do |t|
+    t.string   "topic"
+    t.integer  "start_index"
+    t.integer  "end_index"
     t.integer  "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["book_id"], name: "index_conversations_on_book_id", using: :btree
   end
 
@@ -58,12 +61,13 @@ ActiveRecord::Schema.define(version: 20170717045340) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "votes"
-    t.integer  "flag"
+    t.integer  "votes",           default: 0
+    t.boolean  "flag",            default: false
+    t.string   "content"
     t.integer  "conversation_id"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["conversation_id"], name: "index_posts_on_conversation_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end

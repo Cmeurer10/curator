@@ -69,7 +69,7 @@
 <default>NULL</default></row>
 <row name="id_thread" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="thread" row="id" />
+<default>NULL</default><relation table="conversation" row="id" />
 </row>
 <row name="id_user" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -85,22 +85,31 @@
 <part>id</part>
 </key>
 </table>
-<table x="629" y="149" name="book">
+<table x="627" y="70" name="book">
 <row name="id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="info" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="id_course" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="course" row="id" />
 </row>
+<row name="title" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="author" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="publisher" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="isbn" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="776" y="243" name="thread">
+<table x="776" y="243" name="conversation">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>

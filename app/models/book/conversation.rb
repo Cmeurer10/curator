@@ -1,5 +1,6 @@
 class Conversation < ApplicationRecord
   belongs_to :book
+  belongs_to :user
   has_many :posts, dependent: :destroy
 
   validates :topic, presence: true

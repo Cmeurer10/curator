@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :nullify
   has_many :curatorships, dependent: :nullify
   has_many :enrollments, dependent: :destroy
+  has_many :conversations, dependent: :nullify
 
   enum role: { student: 0, curator: 1, admin: 2 }
 

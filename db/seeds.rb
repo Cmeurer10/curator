@@ -45,19 +45,23 @@ end
               content: Faker::Lorem.paragraph(7))
 end
 
+# Conversation creation
 conversations = []
 Book.all.each do |book|
   num = rand(2..6)
   num.times do
     conversations << Conversation.create(topic: Faker::Lorem.sentence,
                      start_index: (book.content.length * rand(1..12) / 15).floor,
-                     end_index: self.start_index + rand(10..20), book: book)
+                     end_index: self.start_index + rand(10..20), book: book,
+                     user: users.select { |u| u.student? }.sample)
   end
 end
 
+# Post creation
 conversations.each do |conv|
   rand(1..3).times do
-    Post.create(content: Faker::Lorem.paragraph, conversation: conv)
+    Post.create(content: Faker::Lorem.paragraph, conversation: conv,
+                user: users.select { |u| u.student? }.sample)
   end
 end
 

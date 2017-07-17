@@ -5,18 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
 
-
   has_many :courses_curated, through: :curatorships, source: :course
   has_many :courses_taken, through: :enrollments, source: :course
   has_many :posts, dependent: :nullify
   has_many :curatorships, dependent: :nullify
   has_many :enrollments, dependent: :destroy
 
+  enum role: { student: 0, curator: 1, admin: 2 }
+
   # validates :username, presence: true, uniqueness: true
-  # validates :first_name, presence: true
-  # validates :last_name, presence: true
   # validates_format_of :username, with: /[A-z\d]*/
+  validates :email, presence: true, uniqueness: true
+  validates_format_of :email, with: Devise::email_regexp
+  # validates :first_name, presence: true
   validates_format_of :first_name, with: /[A-z\s]*/
+  # validates :last_name, presence: true
   validates_format_of :last_name, with: /[A-z\s]*/
 
   def full_name

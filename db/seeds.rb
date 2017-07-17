@@ -26,11 +26,9 @@ rand(15..25).times do
 end
 
 # Course creation
-course = Course.new(name: Faker::Educator.unique.course)
-course.save
+course = Course.create(name: Faker::Educator.unique.course)
 
-
-# Enrollment and Curatorhsip creation
+# Enrollment and Curatorship creation
 users.each do |user|
   if user.student?
     Enrollment.create(user, course)
@@ -40,8 +38,28 @@ users.each do |user|
   user.save
 end
 
-#
+# Book creation
+2.times do
+  Book.create(title: Faker::Book.title, author: Faker::Book.author,
+              publisher: Faker::Book.publisher, course: course,
+              content: Faker::Lorem.paragraph(7))
+end
 
+conversations = []
+Book.all.each do |book|
+  num = rand(2..6)
+  num.times do
+    conversations << Conversation.create(topic: Faker::Lorem.sentence,
+                     start_index: (book.content.length * rand(1..12) / 15).floor,
+                     end_index: self.start_index + rand(10..20), book: book)
+  end
+end
+
+conversations.each do |conv|
+  rand(1..3).times do
+    Post.create(content: Faker::Lorem.paragraph, conversation: conv)
+  end
+end
 
 
 def new_user

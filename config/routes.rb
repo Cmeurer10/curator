@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :conversations do
-      resources :posts
+      resources :posts, shallow: true, except: :show
     end
   end
 

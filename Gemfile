@@ -17,6 +17,9 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 
+# Facebook authorization feature
+gem 'omniauth-facebook'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

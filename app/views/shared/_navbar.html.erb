@@ -1,5 +1,8 @@
 <div class="navbar-wagon">
   <!-- Logo -->
+
+  <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+  <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo.png" %>
   <% end %>
@@ -73,4 +76,3 @@
     </div>
   </div>
 </div>
-

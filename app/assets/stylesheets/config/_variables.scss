@@ -6,6 +6,19 @@
 $base-font: "Open Sans", "Helvetica", "sans-serif";
 $header-font: "Raleway", "Helvetica", "sans-serif";
 
+@font-face {
+  font-family: "Jaapokki";
+  src:font-url('jaapokkisubtract-regular.eot');
+  src:font-url('jaapokkisubtract-regular.eot?#iefix') format('embedded-opentype'),
+      font-url('jaapokkisubtract-regular.svg#jaapokkisubtract-regular') format('svg'),
+      font-url('jaapokkisubtract-regular.woff') format('woff'),
+      font-url('jaapokkisubtract-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$branding-font: "Jaapokki";
+
 // Local fonts (uncomment following lines)
 // @font-face {
 //   font-family: "Font Name";
@@ -32,3 +45,12 @@ $yellow: #FDB631;
 $orange: #E67E22;
 $green: #32B796;
 $gray: #000000;
+
+
+
+
+
+
+.background-default{
+	background-color: blue;
+}

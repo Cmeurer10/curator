@@ -1,10 +1,12 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-
-  <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" if current_user %>
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo.png" %>
-  <% end %>
+  <div class="branding ">
+    <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" if current_user %>
+    <%= link_to root_path, class: "navbar-wagon-brand" do %>
+      <%= image_tag "logo.png" %>
+    <% end %>
+    <h3>Curator</h3>
+  </div>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
@@ -57,7 +59,7 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".top_call_to_action", default: "Find your Course"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <%= link_to t(".top_call_to_action", default: "Find your Course"), "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
     <% end %>

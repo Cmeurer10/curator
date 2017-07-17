@@ -6,8 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# User generator function
+def new_user
+  User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name,
+              email: Faker::Internet.unique.email, username: Faker::Internet.unique.user_name,
+              password: 'valid_password', password_confirmation: 'valid_password')
+end
+
 # Admin Creation
-if User.all.where(role: 2) < 1
+if User.all.where(role: 2).count < 1
   user = new_user
   user.role = 2
 end
@@ -31,7 +38,7 @@ course = Course.create(name: Faker::Educator.unique.course)
 # Enrollment and Curatorship creation
 users.each do |user|
   if user.student?
-    Enrollment.create(user, course)
+    Enrollment.new(user, course)
   else
     Curatorship.create(user, course)
   end
@@ -63,11 +70,4 @@ conversations.each do |conv|
     Post.create(content: Faker::Lorem.paragraph, conversation: conv,
                 user: users.select { |u| u.student? }.sample)
   end
-end
-
-
-def new_user
-  User.new(first_name: Faker::Name.first_name, last_name: Faker::Name.unique.last_name,
-              email: Faker::Internet.unique.email, username: Faker::Internet.unique.user_name,
-              password: 'valid_password', password_confirmation: 'valid_password')
 end

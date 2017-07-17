@@ -5,6 +5,7 @@ class CreateConversations < ActiveRecord::Migration[5.0]
       t.integer :start_index
       t.integer :end_index
       t.references :book, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

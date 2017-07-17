@@ -3,12 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: [:facebook]
+
 
   has_many :courses_curated, through: :curatorships, source: :course
   has_many :courses_taken, through: :enrollments, source: :course
   has_many :posts, dependent: :nullify
   has_many :curatorships, dependent: :nullify
-  has_many :enrollments:, dependent: :destroy
+  has_many :enrollments, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :first_name, presence: true

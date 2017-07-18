@@ -86,7 +86,7 @@ function highlight(colour) {
     }
 }
 
-function selectAndHighlightRange(id, start, end) {
-    setSelectionRange(document.getElementById("test"), start, end);
-    highlight("yellow");
-}
+// function selectAndHighlightRange(id, start, end) {
+//     setSelectionRange(document.getElementById("test"), start, end);
+//     highlight("yellow");
+// }

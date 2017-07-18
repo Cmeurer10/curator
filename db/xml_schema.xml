@@ -63,11 +63,11 @@
 <part>id</part>
 </key>
 </table>
-<table x="982" y="264" name="post">
+<table x="976" y="260" name="post">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_thread" null="1" autoincrement="0">
+<row name="id_conversation" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="conversation" row="id" />
 </row>
@@ -132,6 +132,10 @@
 <row name="end_index" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="id_user" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="user" row="id" />
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>

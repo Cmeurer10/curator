@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_course
 
   # GET /books
   # GET /books.json
@@ -28,7 +29,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to course_books_path(@course), notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -54,9 +55,11 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    @book.remove_file
+    @book.save
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to course_books_path(@course), notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +70,12 @@ class BooksController < ApplicationController
       @book = Book.find(params[:id])
     end
 
+    def set_course
+      @course = Course.first
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:name)
+      params.require(:book).permit(:title, :author, :publisher, :isbn, :course_id, :file, :file_cache)
     end
 end

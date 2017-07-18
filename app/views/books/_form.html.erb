@@ -1,0 +1,44 @@
+<%= simple_form_for([@course, @book]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :author %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :publisher %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :isbn %>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.association :course, label_method: :name, value_method: :id %>
+  </div>
+
+  <div>
+    <%= f.file_field :file %>
+    <%= f.hidden_field :file_cache %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<!--
+t.string   "title"
+t.string   "author"
+t.string   "publisher"
+t.string   "isbn"
+t.string   "content"
+t.integer  "course_id"
+t.datetime "created_at", null: false
+t.datetime "updated_at", null: false
+t.json     "paths"
+t.index ["course_id"], name: "index_books_on_course_id", using: :btree -->

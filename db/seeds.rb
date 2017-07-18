@@ -66,7 +66,6 @@ books.each do |book|
   num = rand(2..6)
   num.times do
     start_index = ((book.content.length * rand(1..12) / 15).floor).to_i
-    byebug
     conversations << Conversation.create(topic: Faker::Lorem.sentence,
                      start_index: start_index, end_index: start_index + rand(10..20),
                      book: book, user: users.select(&:student?).sample)

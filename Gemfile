@@ -21,6 +21,11 @@ gem 'uglifier'
 gem 'omniauth-facebook'
 # Faker is used for seeding
 gem 'faker'
+# Using Carrierwave to upload files and access Google Storage
+gem 'carrierwave', '~> 1.0'
+gem "fog-google"
+gem 'google-api-client', '~> 0.8.6'
+gem "mime-types"
 
 group :development, :test do
   gem 'better_errors'

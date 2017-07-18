@@ -17,6 +17,7 @@ end
 if User.all.where(role: 2).count < 1
   user = new_user
   user.role = 2
+  user.save
 end
 
 # Professor and TA creation
@@ -38,29 +39,37 @@ course = Course.create(name: Faker::Educator.unique.course)
 # Enrollment and Curatorship creation
 users.each do |user|
   if user.student?
-    Enrollment.new(user, course)
+    e = Enrollment.new
+    e.user = user
+    e.course = course
+    e.save
   else
-    Curatorship.create(user, course)
+    c = Curatorship.new
+    c.user = user
+    c.course = course
+    c.save
   end
   user.save
 end
 
 # Book creation
+books = []
 2.times do
-  Book.create(title: Faker::Book.title, author: Faker::Book.author,
+  books << Book.create(title: Faker::Book.title, author: Faker::Book.author,
               publisher: Faker::Book.publisher, course: course,
               content: Faker::Lorem.paragraph(7))
 end
 
 # Conversation creation
 conversations = []
-Book.all.each do |book|
+books.each do |book|
   num = rand(2..6)
   num.times do
+    start_index = ((book.content.length * rand(1..12) / 15).floor).to_i
+    byebug
     conversations << Conversation.create(topic: Faker::Lorem.sentence,
-                     start_index: (book.content.length * rand(1..12) / 15).floor,
-                     end_index: self.start_index + rand(10..20), book: book,
-                     user: users.select { |u| u.student? }.sample)
+                     start_index: start_index, end_index: start_index + rand(10..20),
+                     book: book, user: users.select(&:student?).sample)
   end
 end
 
@@ -68,6 +77,6 @@ end
 conversations.each do |conv|
   rand(1..3).times do
     Post.create(content: Faker::Lorem.paragraph, conversation: conv,
-                user: users.select { |u| u.student? }.sample)
+                user: users.select(&:student?).sample)
   end
 end

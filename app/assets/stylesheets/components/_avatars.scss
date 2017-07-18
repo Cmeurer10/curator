@@ -1,10 +1,12 @@
 .avatar {
   width: 30px;
   border-radius: 50%;
+  box-shadow: $avatar-box-shadow
 }
 .avatar-large {
   width: 50px;
   border-radius: 50%;
+  box-shadow: $avatar-box-shadow
 }
 .avatar-bordered {
   width: 30px;

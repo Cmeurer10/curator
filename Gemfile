@@ -19,6 +19,8 @@ gem 'uglifier'
 
 # Facebook authorization feature
 gem 'omniauth-facebook'
+# Faker is used for seeding
+gem 'faker'
 
 group :development, :test do
   gem 'better_errors'

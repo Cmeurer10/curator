@@ -2,8 +2,10 @@
   
   	<div class="conversation-threads-container">
 	  <% @book.conversations.each do |convo| %>
-	    <%= link_to convo.user.full_name, book_conversation_posts_path(@book, convo),
-	        remote: true, class: "btn btn-success threads" %>
+	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
+	  <% button_color = colors.sample %>
+	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),
+	        remote: true, class: "btn #{button_color} threads" %>
 	  <% end %>
   	
   </div>

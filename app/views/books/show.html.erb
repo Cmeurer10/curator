@@ -5,11 +5,16 @@
 		</div>
 		<div class="col-md-4 conversation" id='sidebar'>
 			<div class="threads-container">
-				<span class="glyphicon glyphicon-minus inline" id="convo-glyph"></span><h2 id ="conversations-clickable">Conversations</h2>
+				<div class="title">
+					<i class="fa fa-minus inline" aria-hidden="true" id="convo-glyph"></i>
+					<h2 id ="conversations-clickable">Conversations</h2>
+				</div>
 				<%= render "/books/sidebar/conversations" %>	
 			</div>
-			<div class="posts-container">
-				<span class="glyphicon glyphicon-plus inline" id="post-glyph"></span><h2 id="post-clickable">Posts</h2>
+			<div class="posts-container hidden">
+				<div class="title">
+					<i class="fa fa-plus inline" aria-hidden="true" id="post-glyph"></i><h2 id="post-clickable">Posts</h2>
+				</div>
 				<div id="posts">
 				
 				</div>
@@ -31,8 +36,9 @@
  			
      	    $("a.threads").click(function(){
 		        $('#conversation-container').slideUp("slow");
-		        $("#convo-glyph").removeClass('glyphicon glyphicon-minus');
-		        $("#convo-glyph").addClass('glyphicon glyphicon-plus');
+		        $("#convo-glyph").removeClass('fa fa-minus inline');
+		        $("#convo-glyph").addClass('fa fa-plus inline');
+		        $(".posts-container").removeClass('hidden');
 
 			});
 			$('#conversations-clickable').click(function() {
@@ -41,14 +47,14 @@
 
 			    if ($('#conversation-container').is(":visible"))
 				    {
-				         $('#convo-glyph').toggleClass('glyphicon glyphicon-plus');
-				         $('#convo-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				         $('#convo-glyph').toggleClass('fa fa-plus');
+				         $('#convo-glyph').toggleClass('fa fa-minus'); 
 
 				    }
 				    else
 				    { 
-				         $('#convo-glyph').toggleClass('glyphicon glyphicon-plus'); 
-				         $('#convo-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				         $('#convo-glyph').toggleClass('fa fa-plus'); 
+				         $('#convo-glyph').toggleClass('fa fa-minus'); 
 				    }
 			});
 			$('#post-clickable').click(function() {
@@ -57,14 +63,14 @@
 
 			    if ($('#post-container').is(":visible"))
 				    {
-				         $('#post-glyph').toggleClass('glyphicon glyphicon-plus');
-				         $('#post-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				         $('#post-glyph').toggleClass('fa fa-plus');
+				         $('#post-glyph').toggleClass('fa fa-minus'); 
 
 				    }
 				    else
 				    { 
-				         $('#post-glyph').toggleClass('glyphicon glyphicon-plus'); 
-				         $('#post-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				         $('#post-glyph').toggleClass('fa fa-plus'); 
+				         $('#post-glyph').toggleClass('fa fa-minus'); 
 				    }
 			});
 			

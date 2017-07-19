@@ -14,5 +14,8 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/dashboard";
-@import "pages/book"
+@import "pages/book";
 
+h1, h2, h3, h4, h5, h6, p, a, i {
+	color:black;
+}

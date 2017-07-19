@@ -1,4 +1,9 @@
 <div id='conversation-container'>
   <h2>Threads</h1>
-  <div class="btn btn-primary" id='posts-trigger'>Posts</div>
+  <% @book.conversations.each do |convo| %>
+    <!-- <div class='btn btn-warning conv-btn' id="convo-<%#= convo.id %>"><%#= convo.user.full_name %></div> -->
+    <%= link_to convo.user.full_name, book_conversation_posts_path(@book, convo), remote: true, class: "btn btn-warning"%>
+  <% end %>
+  <%= render "/conversations/form" %>
+  <a id='posts-trigger'>Posts</a>
 </div>

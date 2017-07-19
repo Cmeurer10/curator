@@ -1,10 +1,16 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_conversation, only: [:index]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = @conversation.posts
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /posts/1
@@ -25,16 +31,18 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
+    redirect_to @book if @post.save
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @post.save
+    #     format.html { redirect_to @post, notice: 'Post was successfully created.' }
+    #     format.json { render :show, status: :created, location: @post }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @post.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /posts/1
@@ -67,8 +75,12 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    def set_conversation
+      @conversation = Conversation.find(params[:conversation_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:votes, :flag, :conversation_id, :user_id)
+      params.require(:post).permit(:content, :conversation_id)
     end
 end

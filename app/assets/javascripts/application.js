@@ -84,6 +84,7 @@ function highlight(colour) {
         range = document.selection.createRange();
         range.execCommand("BackColor", false, colour);
     }
+    
 }
 
 // function selectAndHighlightRange(id, start, end) {

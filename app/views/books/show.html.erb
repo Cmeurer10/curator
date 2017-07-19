@@ -56,8 +56,8 @@
 			    console.log(start);
 			    console.log(end);
 			    createThread(topic, start, end);
-
 			    }
+
 			createThread=function(topic, start_index, end_index){
 				jQuery.ajax({
 			      type: "POST",
@@ -82,6 +82,17 @@
 
 		    }
 		}
+		// 
+		// function refreshPosts() {
+		//   $.ajax({
+		//
+		//   });
+		// }
+		//
+	  // $('#new-post-btn').click(function() {
+	  //   refreshPosts();
+	  // });
+
 	});
 
 

@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_conversation, only: [:index]
+  before_action :set_book, only: [:index]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = @conversation.posts
-
+    @post = Post.new
     respond_to do |format|
       format.html
       format.js
@@ -77,6 +78,10 @@ class PostsController < ApplicationController
 
     def set_conversation
       @conversation = Conversation.find(params[:conversation_id])
+    end
+
+    def set_book
+      @book = @conversation.book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

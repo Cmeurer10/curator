@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :books, only: [:show] do
     resources :conversations, except: [:show] do
-      resources :posts, shallow: true, except: [:show]
+      resources :posts#, shallow: true, except: [:show]
     end
   end
 

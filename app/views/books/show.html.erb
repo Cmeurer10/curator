@@ -4,8 +4,8 @@
 			<p id="text" spellcheck="false"><%= @book.content %></p>
 		</div>
 		<div class="col-md-4 conversation" id='sidebar'>
-			<div id="test"></div>
 			<%= render "/books/sidebar/conversations" %>
+			<div id="posts"></div>
 			<%#= render "/books/sidebar/posts" %>
 			<%#= render "/posts/form" %>
 		</div>
@@ -59,29 +59,24 @@
 		// $('#new-post-btn').on('click', function() {
 		// 	$('#conversation-container').show();
 		// });
-		$('.conv-btn').on('click', function(event) {
-    	var str = $(event.target).attr('id');
-			id = str.slice(6,)
-			console.log(id);
-
-
-			$.ajax({
-		    url: "https://api.github.com/users/" + $('#username').val() + "/repos",
-		    success: function(data) {
-		      $('#repos').empty();
-		      data.forEach(function(repository) {
-		        $('#repos').append("<li>" + repository.full_name + "</li>");
-		      });
-		    },
-		    error: function(jqXHR) {
-		      $('#repos').empty().append("<li>" + jqXHR.responseText + "</li>");
-		    }
-		  });
-
-
-
-		});
-
+		// $('.conv-btn').on('click', function(event) {
+    // 	var str = $(event.target).attr('id');
+		// 	id = str.slice(6,)
+		// 	console.log(id);
+		//
+		// 	$.ajax({
+		//     url: "https://api.github.com/users/" + $('#username').val() + "/repos",
+		//     success: function(data) {
+		//       $('#repos').empty();
+		//       data.forEach(function(repository) {
+		//         $('#repos').append("<li>" + repository.full_name + "</li>");
+		//       });
+		//     },
+		//     error: function(jqXHR) {
+		//       $('#repos').empty().append("<li>" + jqXHR.responseText + "</li>");
+		//     }
+		//   });
+		// });
 
 	});
 

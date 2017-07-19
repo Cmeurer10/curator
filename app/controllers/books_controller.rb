@@ -5,13 +5,14 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = policy_scope(Book)
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
     @conversations = @book.conversations
+    authorize @book
   end
 
   # GET /books/new
@@ -72,6 +73,7 @@ class BooksController < ApplicationController
     end
 
     def set_course
+      # TODO: make the correct course
       @course = Course.first
     end
 

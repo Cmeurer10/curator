@@ -1,8 +1,13 @@
 <div id='post-container'>
   <h2>Posts</h2>
-  <% if !@posts.nil? %>
-  <h4><%= @posts.first.user.full_name %></h4>
-  <% end %>
+  <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <p><%= post.content %></p>
+        <p>Posted by: <%= post.user.full_name %> at <%= post.created_at %></p>
+      </li>
+    <% end %>
+  </ul>
+  <%= render "/posts/form", locals: {post: @post, book: @book, conversation: @conversation} %>
   <div class="btn btn-primary" id='new-post-btn'>New Post</div>
-  <a id='conversations-trigger'>Back to Threads</a>
 </div>

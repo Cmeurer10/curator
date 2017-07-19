@@ -30,7 +30,7 @@ class ConversationsController < ApplicationController
       if @conversation.save
         # format.html { redirect_to @conversation.book, notice: 'Conversation was successfully created.' }
         # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully created.' }
-         format.html { render "/books/sidebar/posts", notice: 'Conversation was successfully updated.' }
+        format.html { render partial: "/books/sidebar/posts", notice: 'Conversation was successfully updated.' }
         # format.json { render :show, status: :created, location: @conversation.book }
         format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
       else

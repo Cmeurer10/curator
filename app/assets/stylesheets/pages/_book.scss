@@ -1,5 +1,8 @@
 .platform{
 	padding: 50px 35px;
+	 background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 65%), asset_url('jumbotron.jpeg');
+	 background-size: cover;
+	 background-position: center;
 }
 
 
@@ -9,6 +12,7 @@
     overflow: scroll;
     background-color: white;
     box-shadow: $card-box-shadow;
+    padding: 50px;
 
 }
 .conversation{

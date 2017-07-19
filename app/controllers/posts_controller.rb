@@ -1,10 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_conversation, only: [:index]
-  before_action :set_book, only: [:index]
+  before_action :set_post, only: [:update, :destroy]
+  before_action :set_conversation, only: [:index, :create, :destroy]
+  before_action :set_book, only: [:index, :create, :destroy]
 
-  # GET /posts
-  # GET /posts.json
   def index
     @posts = @conversation.posts
     @post = Post.new
@@ -14,30 +12,18 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
   end
 
-  # GET /posts/new
+
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
-  def edit
-  end
-
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
-    # TODO: understand why conversation id is being weird
-    @conversation = Conversation.find(params[:conversation_id])
     @post.conversation = @conversation
     @post.user = current_user
-    @book = @conversation.book
-    @posts = Post.where(conversation: @conversation)
 
     respond_to do |format|
       if @post.save
@@ -47,21 +33,8 @@ class PostsController < ApplicationController
         format.html { redirect_to @post.conversation.book }
       end
     end
-
-
-    # respond_to do |format|
-    #   if @post.save
-    #     format.html { redirect_to @post, notice: 'Post was successfully created.' }
-    #     format.json { render :show, status: :created, location: @post }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @post.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -74,13 +47,14 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
-    @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+      if @post.destroy
+        @post = Post.new
+        format.js { render :index }
+      else
+        format.html { redirect_to @post.conversation.book }
+      end
     end
   end
 
@@ -92,6 +66,7 @@ class PostsController < ApplicationController
 
     def set_conversation
       @conversation = Conversation.find(params[:conversation_id])
+      @posts = Post.where(conversation: @conversation)
     end
 
     def set_book

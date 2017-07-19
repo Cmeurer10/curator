@@ -27,14 +27,15 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new(conversation_params)
 
     respond_to do |format|
-      if @conversation.save!
+      if @conversation.save
         # format.html { redirect_to @conversation.book, notice: 'Conversation was successfully created.' }
-        format.html { redirect_to root_path, notice: 'Conversation was successfully created.' }
+        # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully created.' }
+         format.html { render "/books/sidebar/posts", notice: 'Conversation was successfully updated.' }
         # format.json { render :show, status: :created, location: @conversation.book }
-        format.json { render :home, status: :created, location: root_path }
+        format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
       else
         # format.html { render :new }
-        format.html { redirect_to root_path, notice: 'Conversation failed' }
+        format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation failed' }
 
         format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
@@ -47,9 +48,10 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conversation.update(conversation_params)
         # format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
-        format.html { redirect_to root_path, notice: 'Conversation was successfully updated.' }
+        # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully updated.' }
+        format.html { render "books/sidebar/posts", notice: 'Conversation was successfully updated.' }
         # format.json { render :show, status: :ok, location: @conversation }
-        format.json { render :show, status: :ok, location: root_path }
+        format.json { render :show, status: :ok, location: "/books/#{@conversation.book_id}" }
       else
         format.html { render :edit }
         format.json { render json: @conversation.errors, status: :unprocessable_entity }

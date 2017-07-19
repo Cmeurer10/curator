@@ -28,10 +28,15 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
-        format.json { render :show, status: :created, location: @conversation }
+        # format.html { redirect_to @conversation.book, notice: 'Conversation was successfully created.' }
+        # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully created.' }
+         format.html { render "/books/sidebar/posts", notice: 'Conversation was successfully updated.' }
+        # format.json { render :show, status: :created, location: @conversation.book }
+        format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
       else
-        format.html { render :new }
+        # format.html { render :new }
+        format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation failed' }
+
         format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
@@ -42,8 +47,11 @@ class ConversationsController < ApplicationController
   def update
     respond_to do |format|
       if @conversation.update(conversation_params)
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @conversation }
+        # format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
+        # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully updated.' }
+        format.html { render "books/sidebar/posts", notice: 'Conversation was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @conversation }
+        format.json { render :show, status: :ok, location: "/books/#{@conversation.book_id}" }
       else
         format.html { render :edit }
         format.json { render json: @conversation.errors, status: :unprocessable_entity }
@@ -69,6 +77,7 @@ class ConversationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conversation_params
-      params.require(:conversation).permit(:book_id)
+
+      params.require(:conversation).permit(:book_id, :topic, :start_index, :end_index, :user_id)
     end
 end

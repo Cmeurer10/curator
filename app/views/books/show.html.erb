@@ -8,6 +8,8 @@
 			<div id="posts"></div>
 			<%#= render "/books/sidebar/posts" %>
 			<%#= render "/posts/form" %>
+  			<%#= render "/books/sidebar/posts" %>
+
 		</div>
 	</div>
 </div>
@@ -27,59 +29,60 @@
 		    else if (document.selection) { // should come last; Opera!
 		        userSelection = document.selection.createRange();
 		    }
+		 //    function wrapSelectedText() {
+			//     var userSelection= window.getSelection().getRangeAt(0);
+			//     var selectedText = userSelection.extractContents();
+			//     var div= document.createElement("div");
+			//     div.style.backgroundColor = "yellow";
+			//     div.appendChild(userSelection);
+			//     selection.insertNode(div);
+			// }
+			hightlight=function()
+			    {
+			    var selection= window.getSelection().getRangeAt(0);
+			    var selectedText = selection.extractContents();
+			    var span= document.createElement("span");
+			    span.style.backgroundColor = "yellow";
+			    span.appendChild(selectedText);
+			    selection.insertNode(span);
+
+			    span.setAttribute("class", "hightlighted");
+			    var start = ($('#text').text().search(selection));
+			    start = parseInt(start);
+			    var end = selection.toString().length + start;
+			    end = parseInt(end);
+			    var topic = selection.toString();
+			    console.log(topic);
+			    console.log(start);
+			    console.log(end);
+			    createThread(topic, start, end);
+
+			    }
+			createThread=function(topic, start_index, end_index){
+				jQuery.ajax({
+			      type: "POST",
+			      url: "/books/<%= @book.id %>/conversations",
+			      data: {  conversation: { topic: topic, start_index: start_index, end_index: end_index, user_id: "<%= current_user.id %>", book_id: "<%= @book.id %>" }},
+			    //   success:function(data) {
+			    //     alert(data.id)
+			    //     return false
+			    // }
+			    //   error: function(data){
+			    //     return false
+			    // }
+			    });
+			}
+
 		  function pressed(e)
 		    {
 		    if(e.keyCode === 13)
 		    {
 
-			    var node = document.getElementById('text');
-				// htmlContent = node.innerHTML,
-				// // htmlContent = "Some <span class="foo">sample</span> text."
+		        hightlight();
 
-				textContent = node.textContent;
-				// textContent = "Some sample text."
-
-		    	// selectAndHighlightRange('text', selectStart, selectEnd);
-		        alert(userSelection);
-		        highlight("yellow");
-		        // $(userSelection).wrap("<span class='red'></span>")
-		        // selectAndHighlightRange('text', 22, 30)
-
-		        //put button.click() here
 		    }
 		}
-		// $('#posts-trigger').on('click', function() {
-		// 	$('#conversation-container').hide();
-		// 	$('#post-container').show();
-		// });
-		// $('#conversations-trigger').on('click', function() {
-		// 	$('#post-container').hide();
-		// 	$('#conversation-container').show();
-		//});
-		// $('#new-post-btn').on('click', function() {
-		// 	$('#conversation-container').show();
-		// });
-		// $('.conv-btn').on('click', function(event) {
-    // 	var str = $(event.target).attr('id');
-		// 	id = str.slice(6,)
-		// 	console.log(id);
-		//
-		// 	$.ajax({
-		//     url: "https://api.github.com/users/" + $('#username').val() + "/repos",
-		//     success: function(data) {
-		//       $('#repos').empty();
-		//       data.forEach(function(repository) {
-		//         $('#repos').append("<li>" + repository.full_name + "</li>");
-		//       });
-		//     },
-		//     error: function(jqXHR) {
-		//       $('#repos').empty().append("<li>" + jqXHR.responseText + "</li>");
-		//     }
-		//   });
-		// });
-
 	});
-
 
 
   </script>

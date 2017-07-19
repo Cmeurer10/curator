@@ -3,8 +3,8 @@
       <div class="post-card">
         <div class="poster-info">
           <div class="poster-avatar">
-            <% if current_user.facebook_picture_url %>
-              <% avatar_url = current_user.facebook_picture_url %>
+            <% if post.user.facebook_picture_url %>
+              <% avatar_url = post.user.facebook_picture_url %>
               <%= image_tag avatar_url, class: "avatar" %>
             <% else %>
               <div class="default-avatar background-default" >

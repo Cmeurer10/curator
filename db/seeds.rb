@@ -55,9 +55,13 @@ end
 # Book creation
 books = []
 2.times do
+  content = ""
+  rand(5..7).times do
+    content += Faker::Lorem.paragraph(rand(4..7)) + '\n'
+  end
   books << Book.create(title: Faker::Book.title, author: Faker::Book.author,
               publisher: Faker::Book.publisher, course: course,
-              content: Faker::Lorem.paragraph(7))
+              content: content[0..-3])
 end
 
 # Conversation creation

@@ -32,8 +32,22 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    # TODO: understand why conversation id is being weird
+    @conversation = Conversation.find(params[:conversation_id])
+    @post.conversation = @conversation
     @post.user = current_user
-    redirect_to @book if @post.save
+    @book = @conversation.book
+    @posts = Post.where(conversation: @conversation)
+
+    respond_to do |format|
+      if @post.save
+        @post = Post.new
+        format.js { render :index }
+      else
+        format.html { redirect_to @post.conversation.book }
+      end
+    end
+
 
     # respond_to do |format|
     #   if @post.save
@@ -86,6 +100,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :conversation_id)
+      params.require(:post).permit(:content)
     end
 end

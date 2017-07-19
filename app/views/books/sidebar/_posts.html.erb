@@ -1,4 +1,6 @@
-<div style='display: none' id='post-container'>
+<div id='post-container'>
   <h2>Posts</h2>
-  <div class="btn btn-primary" id='conversations-trigger'>Threads</div>
+  <h4><%= @posts.first.user.full_name %></h4>
+  <div class="btn btn-primary" id='new-post-btn'>New Post</div>
+  <a id='conversations-trigger'>Back to Threads</a>
 </div>

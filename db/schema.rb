@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170718060101) do
     t.string   "author"
     t.string   "publisher"
     t.string   "isbn"
-    t.string   "content"
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,11 +32,9 @@ ActiveRecord::Schema.define(version: 20170718060101) do
     t.integer  "start_index"
     t.integer  "end_index"
     t.integer  "book_id"
-    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["book_id"], name: "index_conversations_on_book_id", using: :btree
-    t.index ["user_id"], name: "index_conversations_on_user_id", using: :btree
   end
 
   create_table "courses", force: :cascade do |t|
@@ -80,7 +77,7 @@ ActiveRecord::Schema.define(version: 20170718060101) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
-    t.integer  "role",                   default: 0
+    t.string   "role"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -105,7 +102,6 @@ ActiveRecord::Schema.define(version: 20170718060101) do
 
   add_foreign_key "books", "courses"
   add_foreign_key "conversations", "books"
-  add_foreign_key "conversations", "users"
   add_foreign_key "curatorships", "courses"
   add_foreign_key "curatorships", "users"
   add_foreign_key "enrollments", "courses"

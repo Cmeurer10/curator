@@ -1,8 +1,10 @@
 <div id='conversation-container'>
-  <h2>Threads</h1>
-  <% @book.conversations.each do |convo| %>
-    <%= link_to convo.user.full_name, book_conversation_posts_path(@book, convo),
-        remote: true, class: "btn btn-success"%>
-  <% end %>
-  <%= render "/conversations/form" %>
+  
+  	<div class="conversation-threads-container">
+	  <% @book.conversations.each do |convo| %>
+	    <%= link_to convo.user.full_name, book_conversation_posts_path(@book, convo),
+	        remote: true, class: "btn btn-success threads" %>
+	  <% end %>
+  	
+  </div>
 </div>

@@ -9,6 +9,23 @@
     overflow: scroll;
 
 }
-.red{
-	background-color: red;
+.threads{
+	margin: 5px;
+}
+.conversation-thread-container{
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+#sidebar{
+	height: 500px;
+}
+#conversations-clickable{
+	display: inline-block;
+	margin-left: 10px;
+}
+#post-clickable{
+	display: inline-block;
+	margin-left: 10px;
 }

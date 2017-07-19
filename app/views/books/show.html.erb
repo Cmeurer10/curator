@@ -4,8 +4,16 @@
 			<p id="text" spellcheck="false"><%= @book.content %></p>
 		</div>
 		<div class="col-md-4 conversation" id='sidebar'>
-			<%= render "/books/sidebar/conversations" %>
-			<div id="posts"></div>
+			<div class="threads-container">
+				<span class="glyphicon glyphicon-minus inline" id="convo-glyph"></span><h2 id ="conversations-clickable">Conversations</h2>
+				<%= render "/books/sidebar/conversations" %>	
+			</div>
+			<div class="posts-container">
+				<span class="glyphicon glyphicon-plus inline" id="post-glyph"></span><h2 id="post-clickable">Posts</h2>
+				<div id="posts">
+				
+				</div>
+			</div>
 			<%#= render "/books/sidebar/posts" %>
 			<%#= render "/posts/form" %>
   			<%#= render "/books/sidebar/posts" %>
@@ -18,9 +26,50 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
 
-  // v 1,0
 
      $(document).ready(function(){
+ 			
+     	    $("a.threads").click(function(){
+		        $('#conversation-container').slideUp("slow");
+		        $("#convo-glyph").removeClass('glyphicon glyphicon-minus');
+		        $("#convo-glyph").addClass('glyphicon glyphicon-plus');
+
+			});
+			$('#conversations-clickable').click(function() {
+				/* Act on the event */
+				$('#conversation-container').slideToggle("slow");
+
+			    if ($('#conversation-container').is(":visible"))
+				    {
+				         $('#convo-glyph').toggleClass('glyphicon glyphicon-plus');
+				         $('#convo-glyph').toggleClass('glyphicon glyphicon-minus'); 
+
+				    }
+				    else
+				    { 
+				         $('#convo-glyph').toggleClass('glyphicon glyphicon-plus'); 
+				         $('#convo-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				    }
+			});
+			$('#post-clickable').click(function() {
+				/* Act on the event */
+				$('#post-container').slideToggle("slow");
+
+			    if ($('#post-container').is(":visible"))
+				    {
+				         $('#post-glyph').toggleClass('glyphicon glyphicon-plus');
+				         $('#post-glyph').toggleClass('glyphicon glyphicon-minus'); 
+
+				    }
+				    else
+				    { 
+				         $('#post-glyph').toggleClass('glyphicon glyphicon-plus'); 
+				         $('#post-glyph').toggleClass('glyphicon glyphicon-minus'); 
+				    }
+			});
+			
+			
+
 		 $(document).bind('keypress',pressed);
 		    var userSelection;
 		    if (window.getSelection) {

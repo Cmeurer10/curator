@@ -31,6 +31,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @book.course = @course
     authorize @book
 
     respond_to do |format|

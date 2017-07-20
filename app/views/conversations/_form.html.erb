@@ -1,12 +1,22 @@
 <% @conversation = Conversation.new %>
-<%= simple_form_for([@book, @conversation]) do |f| %>
+<%= simple_form_for([@book, @conversation], remote: true) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :topic, as: :text %>
+  	<%= f.label "Topic/Question" %>
+  	<%= f.hidden_field :start_index, value: "" %>
+  	<%= f.hidden_field :end_index, value: "" %>
+  	<%= f.hidden_field :book_id, value: @book.id %>
+  	<%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :topic, as: :text, label: false %>
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Create New Thread" %>
+	  <div class="modal-footer">
+	    <%= f.submit "Start a Conversation", class: "btn btn-primary", id: "submit"  %>
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
   </div>
 <% end %>
+
+

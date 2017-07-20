@@ -1,5 +1,8 @@
 .platform{
-	padding: 50px;
+	padding: 50px 35px;
+	 background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 65%), asset_url('jumbotron.jpeg');
+	 background-size: cover;
+	 background-position: center;
 }
 
 
@@ -7,8 +10,63 @@
     overflow-y: initial !important;
     height: 90vh;
     overflow: scroll;
+    background-color: white;
+    box-shadow: $card-box-shadow;
+    padding: 50px;
 
 }
-.red{
-	background-color: red;
+.conversation{
+	background-color: white;
+}
+.threads{
+	margin: 5px;
+}
+.conversation-thread-container{
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+#sidebar{
+	width:30%;
+	margin-left: 45px;
+	overflow-y: initial !important;
+    height: 90vh;
+    overflow: scroll;
+
+}
+#conversations-clickable{
+	display: inline-block;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#post-clickable{
+	display: inline-block;
+	margin-left: 10px;
+		margin-top: 0px;
+	margin-bottom: 0px;
+}
+.title{
+	padding: 25px 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.poster-info{
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	border-bottom: 2px solid $gray;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.poster-avatar{
+	margin-right: 25px;
+}
+.poster-details p{
+	margin-bottom: 0px;
+}
+.post-card{
+	margin-bottom: 35px;
 }

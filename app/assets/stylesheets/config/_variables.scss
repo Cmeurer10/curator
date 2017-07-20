@@ -3,8 +3,8 @@
  * ------------------------------------- */
 // Google fonts
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
-$base-font: "Open Sans", "Helvetica", "sans-serif";
-$header-font: "Raleway", "Helvetica", "sans-serif";
+$base-font: "Bellefair", "Helvetica", "sans-serif";
+$header-font: "Sail", "Helvetica", "sans-serif";
 
 @font-face {
   font-family: "jaapokkisubtract-regular";
@@ -39,22 +39,65 @@ $base-height: 1.4;
 // Scheme
 $brand-color: #D23333;
 
-$red: #EE5F5B;
-$blue: #469AE0;
-$yellow: #FDB631;
+$red: #FF5340;
+$blue: #40D6FF;
+$yellow: #F9FF3E;
 $orange: #E67E22;
-$green: #32B796;
-$gray: #000000;
+$green: #43FF44;
+$gray: #B2B2B2;
+$purple: #FF58D6;
+
 
 //Sass Variables
-$card-box-shadow: 6px 10px 25px #B2B2B2;
-$avatar-box-shadow: 2px 5px 3px #B2B2B2;
-
+$card-box-shadow: 6px 10px 25px $gray;
+$avatar-box-shadow: 0px 4px 2px $gray;
+$button-box-shadow: 2px 5px 9px $gray;
 
 
 
 
 
 .background-default{
-	background-color: blue;
+	background-color: white;
+}
+.inline{
+	display: inline-block;
+}
+
+.button-yellow{
+	background-color: $yellow;
+	color: black;
+	box-shadow: $button-box-shadow;
+}
+.button-blue{
+	background-color: $blue;
+	color: black;
+	box-shadow: $button-box-shadow;
+}
+.button-green{
+	background-color: $green;
+	color: black;
+	box-shadow: $button-box-shadow;
+}
+.button-purple{
+	background-color: $purple;
+	color: black;
+	box-shadow: $button-box-shadow;
+}
+.button-red{
+	background-color: $red;
+	color: black;
+	box-shadow: $button-box-shadow;
+}
+.button-delete{
+	background-color: $red;
+	color: black;
+	// box-shadow: $button-box-shadow;
+	padding: 1px 4px !important;
+}
+.button-edit{
+	background-color: $green;
+	color: black;
+	// box-shadow: $button-box-shadow;
+	padding: 1px 4px !important;
 }

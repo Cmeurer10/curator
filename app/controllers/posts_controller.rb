@@ -4,20 +4,22 @@ class PostsController < ApplicationController
   before_action :set_book, only: [:index, :create, :destroy]
 
   def index
-    @posts = @conversation.posts
+    @posts = policy_scope(Post).where(conversation: @conversation)
     @post = Post.new
     respond_to do |format|
       format.html
-      format.js
+      format.js 
     end
   end
 
   def show
+    authorize @post
   end
 
 
   def new
     @post = Post.new
+    authorize @post
   end
 
   def create

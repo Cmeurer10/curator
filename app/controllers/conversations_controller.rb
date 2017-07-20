@@ -5,16 +5,23 @@ class ConversationsController < ApplicationController
   # GET /conversations.json
   def index
     @conversations = Conversation.all
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    @conversations = policy_scope(Conversation).where(book: params[book:id])
   end
 
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    authorize @conversation
   end
 
   # GET /conversations/new
   def new
     @conversation = Conversation.new
+    authorize @conversation
   end
 
   # GET /conversations/1/edit
@@ -25,14 +32,17 @@ class ConversationsController < ApplicationController
   # POST /conversations.json
   def create
     @conversation = Conversation.new(conversation_params)
+    @book = Book.find(params[:book_id])
+    authorize @conversation
 
     respond_to do |format|
       if @conversation.save
         # format.html { redirect_to @conversation.book, notice: 'Conversation was successfully created.' }
         # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully created.' }
-        format.html { render partial: "/books/sidebar/posts", notice: 'Conversation was successfully updated.' }
-        # format.json { render :show, status: :created, location: @conversation.book }
-        format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
+        # format.html { render partial: "/books/sidebar/conversations", notice: 'Conversation was successfully updated.' }
+        # # format.json { render :show, status: :created, location: @conversation.book }
+        # format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
+        format.js { render :index }
       else
         # format.html { render :new }
         format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation failed' }
@@ -45,6 +55,7 @@ class ConversationsController < ApplicationController
   # PATCH/PUT /conversations/1
   # PATCH/PUT /conversations/1.json
   def update
+    authorize @conversation
     respond_to do |format|
       if @conversation.update(conversation_params)
         # format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
@@ -62,6 +73,7 @@ class ConversationsController < ApplicationController
   # DELETE /conversations/1
   # DELETE /conversations/1.json
   def destroy
+    authorize @conversation
     @conversation.destroy
     respond_to do |format|
       format.html { redirect_to conversations_url, notice: 'Conversation was successfully destroyed.' }

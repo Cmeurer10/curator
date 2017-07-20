@@ -1,4 +1,5 @@
 <div id='post-container'>
+  <% if !@posts.nil? %>
     <% @posts.each do |post| %>
       <div class="post-card">
         <div class="poster-info">
@@ -31,6 +32,7 @@
       </div>
        
     <% end %>
+  <% end %>
   <%= render "/posts/form", locals: {post: @post, book: @book, conversation: @conversation} %>
 <!--   <div class="btn btn-primary" id='new-post-btn'>New Post</div> -->
 </div>

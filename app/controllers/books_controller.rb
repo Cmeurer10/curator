@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_course
+  before_action :set_course, except: [:new]
 
   # GET /books
   # GET /books.json
@@ -18,6 +18,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @course = Course.find(params[:course_id])
     authorize @book
   end
 
@@ -30,6 +31,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @book.course = @course
     authorize @book
 
     respond_to do |format|
@@ -79,7 +81,7 @@ class BooksController < ApplicationController
 
     def set_course
       # TODO: make the correct course
-      @course = @book.course
+      @course = @book.nil? ? Course.find(params[:course_id]) : @book.course
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

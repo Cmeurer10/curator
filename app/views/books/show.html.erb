@@ -12,7 +12,7 @@
 					<h2 id ="conversations-clickable">Conversations</h2>
 				</div>
 				<div id="conversations">
-					<%= render "/books/sidebar/conversations" %>	
+					<%= render "/books/sidebar/conversations" %>
 				</div>
 			</div>
 			<div class="posts-container hidden">
@@ -21,7 +21,7 @@
 					<h2 id="post-clickable"></h2>
 				</div>
 				<div id="posts">
-				
+
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 					selectAndHighlightRange("text", <%= convo.start_index %>, <%= convo.end_index %>)
 				<% end %>
 
-			}     
+			}
 
 			function getTextNodesIn(node) {
 			    var textNodes = [];
@@ -155,7 +155,7 @@
 	        $("#convo-glyph").removeClass('fa fa-minus inline');
 	        $("#convo-glyph").addClass('fa fa-plus inline');
 	        $(".posts-container").removeClass('hidden');
-	        $("#post-clickable").append(topic);
+	        $("#post-clickable").text(topic);
 
 		});
 		$('#conversations-clickable').click(function() {
@@ -165,13 +165,13 @@
 		    if ($('#conversation-container').is(":visible"))
 			    {
 			         $('#convo-glyph').toggleClass('fa fa-plus');
-			         $('#convo-glyph').toggleClass('fa fa-minus'); 
+			         $('#convo-glyph').toggleClass('fa fa-minus');
 
 			    }
 			    else
-			    { 
-			         $('#convo-glyph').toggleClass('fa fa-plus'); 
-			         $('#convo-glyph').toggleClass('fa fa-minus'); 
+			    {
+			         $('#convo-glyph').toggleClass('fa fa-plus');
+			         $('#convo-glyph').toggleClass('fa fa-minus');
 			    }
 		});
 		$('#post-clickable').click(function() {
@@ -181,13 +181,13 @@
 		    if ($('#post-container').is(":visible"))
 			    {
 			         $('#post-glyph').toggleClass('fa fa-plus');
-			         $('#post-glyph').toggleClass('fa fa-minus'); 
+			         $('#post-glyph').toggleClass('fa fa-minus');
 
 			    }
 			    else
-			    { 
-			         $('#post-glyph').toggleClass('fa fa-plus'); 
-			         $('#post-glyph').toggleClass('fa fa-minus'); 
+			    {
+			         $('#post-glyph').toggleClass('fa fa-plus');
+			         $('#post-glyph').toggleClass('fa fa-minus');
 			    }
 		});
 			// if(Curator === undefined){
@@ -259,7 +259,7 @@
 			}
 
 
-		// 
+		//
 		// function refreshPosts() {
 		//   $.ajax({
 		//

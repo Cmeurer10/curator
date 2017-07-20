@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @post = Post.new
     respond_to do |format|
       format.html
-      format.js 
+      format.js
     end
   end
 
@@ -26,6 +26,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.conversation = @conversation
     @post.user = current_user
+    authorize @post
 
     respond_to do |format|
       if @post.save
@@ -50,6 +51,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post
     respond_to do |format|
       if @post.destroy
         @post = Post.new

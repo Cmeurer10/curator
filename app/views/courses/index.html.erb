@@ -8,7 +8,7 @@
           <div class="row">
               <div class="col-md-5 col-xs-6">
                 <div class="course-card-pic">
-                  <%= image_tag "math" %>
+                  <%= image_tag "math.svg" %>
                   <h4><strong>Course:</strong></h4>
                   <p><%= course.name %></p>
                 </div>
@@ -58,7 +58,7 @@
                         <div class="book-action">
                             <%= link_to 'Edit', edit_course_book_path(course, book), class: "btn button-edit" %>
                             <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
-                            "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "btn button-delete" %>    
+                            "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "btn button-delete" %>
                         </div>
                       <% end %>
                     </div>
@@ -75,7 +75,7 @@
  <script type="text/javascript">
 
 
-    
+
      $(document).ready(function(){
 
 

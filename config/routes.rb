@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  get 'enrollments/index'
+
+  get 'enrollments/new'
+
+  get 'enrollments/create'
+
+  get 'enrollments/destroy'
+
+  get 'curatorships/index'
+
+  get 'curatorships/new'
+
+  get 'curatorships/create'
+
+  get 'curatorships/destroy'
+
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 

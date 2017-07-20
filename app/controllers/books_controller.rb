@@ -1,31 +1,38 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_course
+  before_action :set_course, except: [:new]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = policy_scope(Book).where(course: @course)
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+    @conversations = @book.conversations
+    authorize @book
   end
 
   # GET /books/new
   def new
     @book = Book.new
+    @course = Course.find(params[:course_id])
+    authorize @book
   end
 
   # GET /books/1/edit
   def edit
+    authorize @book
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @book.course = @course
+    authorize @book
 
     respond_to do |format|
       if @book.save
@@ -41,6 +48,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    authorize @book
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -55,6 +63,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    authorize @book
     @book.remove_file
     @book.save
     @book.destroy
@@ -71,7 +80,8 @@ class BooksController < ApplicationController
     end
 
     def set_course
-      @course = Course.first
+      # TODO: make the correct course
+      @course = @book.nil? ? Course.find(params[:course_id]) : @book.course
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

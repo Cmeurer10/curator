@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :set_book, only: [:index, :create, :destroy]
 
   def index
-    @posts = @conversation.posts
+    @posts = policy_scope(Post).where(conversation: @conversation)
     @post = Post.new
     respond_to do |format|
       format.html
@@ -13,17 +13,20 @@ class PostsController < ApplicationController
   end
 
   def show
+    authorize @post
   end
 
 
   def new
     @post = Post.new
+    authorize @post
   end
 
   def create
     @post = Post.new(post_params)
     @post.conversation = @conversation
     @post.user = current_user
+    authorize @post
 
     respond_to do |format|
       if @post.save
@@ -48,6 +51,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post
     respond_to do |format|
       if @post.destroy
         @post = Post.new

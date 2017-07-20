@@ -27,6 +27,9 @@ gem "fog-google"
 gem 'google-api-client', '~> 0.8.6'
 gem "mime-types"
 
+# Handles authorization
+gem 'pundit'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

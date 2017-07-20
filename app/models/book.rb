@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :course
   has_many :conversations, dependent: :destroy
+  has_many :posts, through: :conversations
 
   mount_uploader :file, BookFileUploader
 

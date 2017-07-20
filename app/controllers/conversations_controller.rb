@@ -4,15 +4,12 @@ class ConversationsController < ApplicationController
   # GET /conversations
   # GET /conversations.json
   def index
-<<<<<<< HEAD
     @conversations = Conversation.all
     respond_to do |format|
       format.html
       format.js
     end
-=======
     @conversations = policy_scope(Conversation).where(book: params[book:id])
->>>>>>> authorization added for all controllers
   end
 
   # GET /conversations/1

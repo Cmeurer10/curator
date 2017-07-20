@@ -2,9 +2,9 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
-$base-font: "Bellefair", "Helvetica", "sans-serif";
-$header-font: "Sail", "Helvetica", "sans-serif";
+@import url('https://fonts.googleapis.com/css?family=Bellefair|Lato');
+$base-font: "Lato", "Helvetica", "sans-serif";
+$header-font: "Bellefair", "Helvetica", "sans-serif";
 
 @font-face {
   font-family: "jaapokkisubtract-regular";
@@ -92,12 +92,18 @@ $button-box-shadow: 2px 5px 9px $gray;
 .button-delete{
 	background-color: $red;
 	color: black;
-	// box-shadow: $button-box-shadow;
+	box-shadow: $button-box-shadow;
 	padding: 1px 4px !important;
 }
 .button-edit{
 	background-color: $green;
 	color: black;
-	// box-shadow: $button-box-shadow;
+	box-shadow: $button-box-shadow;
+	padding: 1px 4px !important;
+}
+.button-new{
+	background-color: $blue;
+	color: black;
+	box-shadow: $button-box-shadow;
 	padding: 1px 4px !important;
 }

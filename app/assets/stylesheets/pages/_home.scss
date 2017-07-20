@@ -22,3 +22,17 @@
 
   
 }
+.signin-btn{
+	color: black;
+	border: 2px solid black;
+	border-radius: 15px;
+	font-weight: lighter;
+
+}
+#signin-landing{
+	text-align: center;
+}
+.signin-btn:hover{
+	color: $gray;
+	border-color: $gray;
+}

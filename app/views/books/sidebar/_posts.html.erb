@@ -5,7 +5,7 @@
           <div class="poster-avatar">
             <% if post.user.facebook_picture_url %>
               <% avatar_url = post.user.facebook_picture_url %>
-              <%= image_tag avatar_url, class: "avatar" %>
+              <%= image_tag avatar_url, class: "avatar-large" %>
             <% else %>
               <div class="default-avatar background-default" >
                 <p class="default-avatar-color"><%= post.user.first_name[0].capitalize %></p>
@@ -13,7 +13,7 @@
             <% end %>
           </div>
           <div class="poster-details">
-            <p><%= post.user.full_name %></p>
+            <p><strong><%= post.user.full_name %></strong></p>
             <p><%= post.created_at %></p>
           </div>
         </div>

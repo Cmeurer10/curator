@@ -4,14 +4,16 @@
 
     <% @courses.each do |course| %>
      <div class="row">
-        <div class="col-md-7 col-xs-12 course-card">
+        <div class="col-md-6 col-xs-12 course-card">
           <div class="row">
-              <div class="col-md-4 col-xs-6">
+              <div class="col-md-5 col-xs-6">
                 <div class="course-card-pic">
                   <%= image_tag "math" %>
+                  <h4><strong>Course:</strong></h4>
+                  <p><%= course.name %></p>
                 </div>
               </div>
-               <div class="col-md-4 col-xs-6 col-md-offset-2">
+               <div class="col-md-5 col-xs-6">
                   <div class="course-card-information">
                     <h3>Instructor:</h3>
                       <ul>
@@ -30,26 +32,34 @@
                  </div>
                </div>
             </div>
+            <div class="actions">
+               <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
+                 <%= link_to 'Edit', edit_course_path(course),class: "btn button-edit" %>
+                 <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm:
+                   "Are you sure? All books in this course and their respective discussions will be lost!"}, class: "btn button-delete" %>
+               <% end %>
+            </div>
             <div class="row">
-              <div class="col-md-12 col-xs-12 course-books btn btn-primary"ype="button" data-toggle="collapse" data-target="#books" aria-expanded="false" aria-controls="books">Books</div>
+              <div class="col-md-12 col-xs-12 course-books btn btn-primary" data-courseid="<%= course.id.to_s %>" id="books-collapse-<%= course.id.to_s %>">Books</div>
 
             </div>
-            <div class="collapse" id="books">
+            <div class="collapse" id="books-<%= course.id.to_s%>">
                 <% course.books.each do |book| %>
                 <%= link_to book_path(book) do %>
-                  <div class="book-card col-xs-6">
+                  <div class="book-card col-xs-4">
                     <div class="book-card-pic" style="background-image:
                            url(<%#= cl_image_path book.cover_photo, :default_image => "math.svg" %>
                                 <%= image_path("math.svg") %>)";>
                     </div>
                     <div class="book-info">
-                      <h2><%= book.title %></h2>
+                      <h4><%= book.title %></h4>
                       <p><%= book.author %></p>
                       <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
-                      <%= link_to 'Edit', edit_course_book_path(course, book) %> |
-                      <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
-                        "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"} %>
-                        this book
+                        <div class="book-action">
+                            <%= link_to 'Edit', edit_course_book_path(course, book), class: "btn button-edit" %>
+                            <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
+                            "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "btn button-delete" %>    
+                        </div>
                       <% end %>
                     </div>
                   </div>
@@ -61,4 +71,22 @@
   <% end %>
 </div>
 
-<div class="btn btn-warning"><%= link_to "Add a course", new_course_path %></div>
+<% content_for :javascript do %>
+ <script type="text/javascript">
+
+
+    
+     $(document).ready(function(){
+
+
+      // $('#books-collapse-<%= @course_id.to_s%>').click(function(event) {
+      $('.course-books').click(function(event) {
+        /* Act on the event */
+        var $this = $(this);
+
+        $('#books-'+ $this.data('courseid')).slideToggle("slow");
+      });
+     });
+
+</script>
+<% end %>

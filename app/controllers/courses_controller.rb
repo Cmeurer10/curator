@@ -32,11 +32,15 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        curatorship = Curatorship.new
+        curatorship.user = current_user
+        curatorship.course = @course
+        curatorship.save
+        format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
+        # format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        # format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end

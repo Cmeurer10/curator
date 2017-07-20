@@ -25,6 +25,7 @@
                      <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm:
                        "Are you sure? All books in this course and their respective discussions will be lost!"} %>
                        this course
+                     <%= link_to "Add a book", new_course_book_path(course) %>
                    <% end %>
                  </div>
                </div>
@@ -59,3 +60,5 @@
     </div>
   <% end %>
 </div>
+
+<div class="btn btn-warning"><%= link_to "Add a course", new_course_path %></div>

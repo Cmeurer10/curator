@@ -1,4 +1,4 @@
-class BookPolicy < ApplicationPolicy
+class CoursePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if admin?
@@ -11,8 +11,9 @@ class BookPolicy < ApplicationPolicy
     end
   end
 
+
   def index?
-    scope
+    true
   end
 
   def show?
@@ -20,7 +21,7 @@ class BookPolicy < ApplicationPolicy
   end
 
   def create?
-    curator_or_admin?
+    true
   end
 
   def new?

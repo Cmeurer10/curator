@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_many :courses_curated, through: :curatorships, source: :course
   has_many :courses_taken, through: :enrollments, source: :course
+  has_many :books_as_curator, through: :courses_curated, source: :books
+  has_many :books_as_student, through: :courses_taken, source: :books
   has_many :posts, dependent: :nullify
   has_many :curatorships, dependent: :nullify
   has_many :enrollments, dependent: :destroy

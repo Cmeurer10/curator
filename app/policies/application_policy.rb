@@ -49,5 +49,29 @@ class ApplicationPolicy
     def resolve
       scope
     end
+
+    private
+    
+    def admin?
+      user.admin?
+    end
+
+    def curator?
+      user.curator?
+    end
+  end
+
+  private
+
+  def admin?
+    user.admin?
+  end
+
+  def curator?
+    user.curator?
+  end
+
+  def curator_or_admin?
+    admin? || curator?
   end
 end

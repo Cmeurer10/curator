@@ -3,14 +3,14 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope '/dashboard' do
-    resources :courses do
+    resources :courses, except: [:show] do
       resources :books, except: [:show]
     end
   end
 
   resources :books, only: [:show] do
-    resources :conversations, except: [:show] do
-      resources :posts#, shallow: true, except: [:show]
+    resources :conversations, only: [:update, :destroy, :create] do
+      resources :posts, only: [:index, :update, :destroy, :create]
     end
   end
 

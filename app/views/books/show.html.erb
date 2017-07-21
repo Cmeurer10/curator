@@ -159,6 +159,7 @@
 			function selectAndHighlightRange(id, start, end, convo_id) {
 			    setSelectionRange(document.getElementById("text"), start, end);
 			    highlight("#D7D7D7", convo_id);
+
 			}
 
  	    $("a.threads").click(function(){
@@ -202,6 +203,11 @@
 			         $('#post-glyph').toggleClass('fa fa-minus');
 			    }
 		});
+		$('#hl-blue').click(function(event) {
+			$('.hightlighted').addClass('hl-blue');
+			});
+
+		// });
 			// if(Curator === undefined){
 		    	Curator = {};
 		     // }
@@ -218,17 +224,26 @@
 		        userSelection = document.selection.createRange();
 		    }
 
+		    //NOTES:  1:  span.setAttribute "myHighlights"
+		    //        2:  
+
 			Curator.getHighlightRange=function()
 			    {
 			    var selection= window.getSelection().getRangeAt(0);
 			    var selectedText = selection.extractContents();
 			    var span= document.createElement("span");
-			    span.setAttribute("id", "<%= @conversation.id %>");
+	
 			    span.style.backgroundColor = "white";
+			    span.setAttribute("class", "awesome");
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
+<<<<<<< HEAD
 					// TODO: is this used?
 			    // span.setAttribute("class", "hightlighted");
+=======
+			    span.setAttribute("class", "hightlighted");
+			    // span.setAttribute("id", "12312");
+>>>>>>> Javascript highglihgt
 			    var start = ($('#text').text().search(selection));
 			    start = parseInt(start);
 			    var end = selection.toString().length + start;
@@ -246,14 +261,14 @@
 			    // return indexes;
 
 			    }
-			Curator.highlightRange=function(){
-				var selection= window.getSelection().getRangeAt(0);
-			    var selectedText = selection.extractContents();
-			    var span= document.createElement("span");
-			    span.style.backgroundColor = "yellow";
-			    span.appendChild(selectedText);
-			    selection.insertNode(span);
-			}
+			// Curator.highlightRange=function(){
+			// 	var selection= window.getSelection().getRangeAt(0);
+			//     var selectedText = selection.extractContents();
+			//     var span= document.createElement("span");
+			//     span.style.backgroundColor = "yellow";
+			//     span.appendChild(selectedText);
+			//     selection.insertNode(span);
+			// }
 
 			// Curator.createThread=function(topic, start_index, end_index){
 			// 	jQuery.ajax({

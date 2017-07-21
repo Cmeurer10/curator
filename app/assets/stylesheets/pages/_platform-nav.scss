@@ -12,9 +12,13 @@
 	height: 20px;
 	width: 20px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	border: 1px solid $gray;
 =======
 >>>>>>> added platform navbar and basic highlighter color dropdown
+=======
+	border: 1px solid $gray;
+>>>>>>> basic platform navabar complete
 }
 
 
@@ -22,10 +26,14 @@
   margin-top: 15px;
   box-shadow: 1px 1px 4px #E6E6E6;
 <<<<<<< HEAD
+<<<<<<< HEAD
   border-color: $gray;
 =======
   border-color: #E6E6E6;
 >>>>>>> added platform navbar and basic highlighter color dropdown
+=======
+  border-color: $gray;
+>>>>>>> basic platform navabar complete
   background-color: black;
 }
 .highlighter-dropdown-menu li {
@@ -62,9 +70,21 @@
 	margin-bottom: 11px;
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+
 }
 .highlighter-dropdown-menu{
-	width: 100px;
+	width: 50px;
+}
+.chapters-drop:hover{
+	cursor: pointer;
+}
+.highlighter-color-drop:hover{
+	cursor: pointer;
+}
+.back-courses a{
+	text-decoration: none;
+	color: white;
+	margin-bottom: 11px;
 }
 #hl-yellow{
 	background-color: $yellow;

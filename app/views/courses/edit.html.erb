@@ -6,11 +6,11 @@
 
 <h3>Curator List</h3>
 <ul>
-  <% @course.curators.each do |curator| %>
+  <% @course.curatorships.each do |curatorship| %>
     <li>
       <p>
-        <%= curator.full_name %>
-        <%= link_to "| remove", new_course_curatorship_path(@course),
+        <%= curatorship.user.full_name %>
+        <%= link_to "| remove", course_curatorship_path(@course, curatorship), method: :delete,
             data: {confirm: "Are you sure you want to remove this curator?"} %>
       </p>
     </li>
@@ -22,10 +22,10 @@
 </p>
 <h3>Student List</h3>
 <ul>
-  <% @course.students.each do |student| %>
+  <% @course.enrollments.each do |enrollment| %>
     <li>
-      <p><%= student.full_name %>
-        <%= link_to "| remove", new_course_enrollment_path(@course), method: :delete,
+      <p><%= enrollment.user.full_name %>
+        <%= link_to "| remove", course_enrollment_path(@course, enrollment), method: :delete,
             data: {confirm: "Are you sure you want to remove this student?"} %>
       </p>
     </li>

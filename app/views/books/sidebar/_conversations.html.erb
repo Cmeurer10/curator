@@ -1,12 +1,13 @@
 <div id='conversation-container'>
-  
-  	<div class="conversation-threads-container">
-	  <% @book.conversations.each do |convo| %>
-	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
-	  <% button_color = colors.sample %>
-	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),
-	        remote: true, class: "btn #{button_color} threads" %>
-	  <% end %>
-  	
+
+  <div class="conversation-threads-container">
+    <% @book.conversations.each do |convo| %>
+      <div class="convo-<%= convo.id %> hidden">
+    	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
+    	  <% button_color = colors.sample %>
+  	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),
+            remote: true, class: "btn #{button_color} threads" %>
+      </div>
+    <% end %>
   </div>
 </div>

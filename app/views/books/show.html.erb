@@ -6,7 +6,7 @@
 			<div class="book-content" id= "text" spellcheck="false">
 				<%=  @chapter.html_safe%>
 				<div id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
-					<%= image_tag "highlighter", class: "newConvoImage" %>	
+					<%= image_tag "highlighter", class: "newConvoImage" %>
 				</div>
 			</div>
 		</div>
@@ -290,6 +290,10 @@
 			// var indexes = Curator.hightlight();
 			// Curator.createThread(<%#= :topic %>, indexes.start, indexes.end);
 			// });
+
+		$("span").hover(function(){
+	    $(this).css("background-color", "pink");
+		});
 	});
 
 

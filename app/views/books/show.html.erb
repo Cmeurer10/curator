@@ -1,27 +1,36 @@
+
+
 <div class="platform">
 	<div class="row">
-		<div class="col-md-8 book-content">
-			<p id="text" spellcheck="false"><%= @book.content %></p>
-			<button type="button" id="newConvo" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
-
-		</div>
-		<div class="col-md-4 conversation" id='sidebar'>
-			<div class="threads-container">
-				<div class="title">
-					<i class="fa fa-minus inline" aria-hidden="true" id="convo-glyph"></i>
-					<h2 id ="conversations-clickable">Conversations</h2>
-				</div>
-				<div id="conversations">
-					<%= render "/books/sidebar/conversations" %>
+		<div class="col-md-8">
+			<div class="book-content">
+	<!-- 			<p id="text" spellcheck="false"><%#=  @chapter.html_safe %></p> -->
+			<!-- 	<iframe src="<%= @book.file %>" frameborder="0"></iframe> -->
+			<object src="<%= @book.file %>" id="book-viewport"><embed src="<%= @book.file %>" id="text"></embed></object>
+				<div class="newConvoButton" id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
+					<%= image_tag "highlighter", class: "newConvoImage" %>	
 				</div>
 			</div>
-			<div class="posts-container hidden">
-				<div class="title">
-					<i class="fa fa-minus inline" aria-hidden="true" id="post-glyph"></i>
-					<h2 id="post-clickable"></h2>
+		</div>
+		<div class="col-md-4" >
+			<div class="conversation" id='sidebar'>
+				<div class="threads-container">
+					<div class="title">
+						<i class="fa fa-minus inline" aria-hidden="true" id="convo-glyph"></i>
+						<h2 id ="conversations-clickable">Highlights</h2>
+					</div>
+					<div id="conversations">
+						<%= render "/books/sidebar/conversations" %>
+					</div>
 				</div>
-				<div id="posts">
-
+				<div class="posts-container hidden">
+					<div class="title">
+						<i class="fa fa-minus inline" aria-hidden="true" id="post-glyph"></i>
+						<h2 id="post-clickable"></h2>
+					</div>
+					<div id="posts">
+					<!-- Contnet goes here from Posts -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -31,7 +40,7 @@
 
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
     	<div class="modal-header">
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -195,7 +204,7 @@
 		     // }
 		$("#newConvo").click(function(event) {
 			/* Act on the event */
-			Curator.hightlight();
+			Curator.getHighlightRange();
 		});
 		 $(document).bind('keypress',pressed);
 		    var userSelection;
@@ -206,15 +215,15 @@
 		        userSelection = document.selection.createRange();
 		    }
 
-			Curator.hightlight=function()
+			Curator.getHighlightRange=function()
 			    {
 			    var selection= window.getSelection().getRangeAt(0);
 			    var selectedText = selection.extractContents();
 			    var span= document.createElement("span");
-			    span.style.backgroundColor = "yellow";
+			    span.setAttribute("id", "<%= @conversation.id %>");
+			    span.style.backgroundColor = "white";
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
-
 			    span.setAttribute("class", "hightlighted");
 			    var start = ($('#text').text().search(selection));
 			    start = parseInt(start);
@@ -233,6 +242,14 @@
 			    // return indexes;
 
 			    }
+			Curator.highlightRange=function(){
+				var selection= window.getSelection().getRangeAt(0);
+			    var selectedText = selection.extractContents();
+			    var span= document.createElement("span");
+			    span.style.backgroundColor = "yellow";
+			    span.appendChild(selectedText);
+			    selection.insertNode(span);
+			}
 
 			// Curator.createThread=function(topic, start_index, end_index){
 			// 	jQuery.ajax({
@@ -253,7 +270,7 @@
 		    {
 			    if(e.keyCode === 13)
 			    {
-			    	Curator.hightlight();
+			    	Curator.getHighlightRange();
 			    	$("#newConvo").click();
 			    }
 			}

@@ -21,22 +21,15 @@
                            <li><%= curator.first_name %> <%= curator.last_name %></li>
                         <% end %>
                      </ul>
-                   <p><%= course.name %></p>
-                   <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
-                     <%= link_to 'Edit', edit_course_path(course) %> |
-                     <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm:
-                       "Are you sure? All books in this course and their respective discussions will be lost!"} %>
-                       this course
-                     <%= link_to "Add a book", new_course_book_path(course) %>
-                   <% end %>
                  </div>
                </div>
             </div>
             <div class="actions">
                <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
-                 <%= link_to 'Edit', edit_course_path(course),class: "btn button-edit" %>
+                 <%= link_to "Add a book", new_course_book_path(course) %> |
+                 <%= link_to 'Edit', edit_course_path(course) %> | 
                  <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm:
-                   "Are you sure? All books in this course and their respective discussions will be lost!"}, class: "btn button-delete" %>
+                   "Are you sure? All books in this course and their respective discussions will be lost!"} %>
                <% end %>
             </div>
             <div class="row">

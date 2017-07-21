@@ -7,12 +7,10 @@
 
 
 .book-content{
-    overflow-y: initial !important;
     height: 90vh;
-    overflow: scroll;
     background-color: white;
     box-shadow: $card-box-shadow;
-    padding: 50px;
+    position: relative;
 
 }
 .conversation{
@@ -20,6 +18,7 @@
 }
 .threads{
 	margin: 5px;
+	white-space: normal;
 }
 .conversation-thread-container{
 
@@ -28,11 +27,10 @@
 	justify-content: space-around;
 }
 #sidebar{
-	width:30%;
-	margin-left: 45px;
 	overflow-y: initial !important;
     height: 90vh;
     overflow: scroll;
+    padding: 10px;
 
 }
 #conversations-clickable{
@@ -69,4 +67,34 @@
 }
 .post-card{
 	margin-bottom: 35px;
+}
+#newConvo{
+	background-color: $blue;
+	border-radius: 50%;
+	box-shadow: $button-box-shadow;
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+}
+#newConvo:hover{
+	cursor: pointer;
+}
+.newConvoImage{
+	width: 35px;
+	position: absolute;
+	top: 5px;
+	left:7px;
+}
+#convoClose{
+	text-align: left;
+}
+#book-viewport{
+	height: 100%;
+	width: 100%;
+}
+#text{
+	height: 100%;
+	width: 100%;
 }

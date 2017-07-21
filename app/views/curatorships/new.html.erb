@@ -1,2 +1,5 @@
-<h1>Curatorships#new</h1>
-<p>Find me in app/views/curatorships/new.html.erb</p>
+<h1>Add curators to course: <%= @course.name %></h1>
+
+<%= render 'form', curatorship: @curatorship %>
+
+<%= link_to 'Back', edit_course_path(@course) %>

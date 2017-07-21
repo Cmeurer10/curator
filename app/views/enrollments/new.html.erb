@@ -1,2 +1,5 @@
-<h1>Enrollments#new</h1>
-<p>Find me in app/views/enrollments/new.html.erb</p>
+<h1>Add students to course: <%= @course.name %></h1>
+
+<%= render 'form', enrollment: @enrollment %>
+
+<%= link_to 'Back', edit_course_path(@course) %>

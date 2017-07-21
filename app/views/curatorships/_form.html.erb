@@ -1,0 +1,12 @@
+<%= simple_form_for([@course, @curatorship]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<%= f.label "Curator Name" %>
+    <%= f.input :user_id, collection: @users, label_method: :full_name, value_method: :id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, value: 'Add curator' %>
+  </div>
+<% end %>

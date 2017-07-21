@@ -1,6 +1,6 @@
 class CuratorshipsController < ApplicationController
   # TODO: add authorization
-  before_action :set_course_id
+  before_action :set_course
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
@@ -10,6 +10,7 @@ class CuratorshipsController < ApplicationController
 
   def new
     @curatorship = Curatorship.new
+    @users = User.all.reject { |u| u.courses_curated.include?(@course) }
   end
 
   def create
@@ -17,7 +18,10 @@ class CuratorshipsController < ApplicationController
     @curatorship.course = @course
 
     if @curatorship.save
-      redirect_to
+      @curatorship.user.role = 'curator'
+      same_course_enrollment = Enrollment.where(user: @curatorship.user, course: @course).first
+      same_course_enrollment.destroy if same_course_enrollment
+      redirect_to edit_course_path(@course)
     end
   end
 
@@ -26,8 +30,8 @@ class CuratorshipsController < ApplicationController
 
   private
 
-  def set_course_id
-    @course = Course.find(:course_id)
+  def set_course
+    @course = Course.find(params[:course_id]) unless params[:course_id].nil?
   end
 
   def curatorship_params

@@ -1,0 +1,5 @@
+<h1>Add curators to course: <%= @course.name %></h1>
+
+<%= render 'form', curatorship: @curatorship %>
+
+<%= link_to 'Back', edit_course_path(@course) %>

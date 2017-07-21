@@ -12,6 +12,7 @@
     </li>
   <% end %>
 </ul>
+<%= link_to "Add a curator", new_course_curatorship_path(@course) %>
 <h3>Student List</h3>
 <ul>
   <% @course.students.each do |student| %>
@@ -20,3 +21,4 @@
     </li>
   <% end %>
 </ul>
+<%= link_to "Add a student", new_course_enrollment_path(@course) %>

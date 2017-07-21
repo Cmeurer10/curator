@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   scope '/dashboard' do
     resources :courses, except: [:show] do
       resources :books, except: [:show]
+      resources :enrollments, except: [:show]
+      resources :curatorships, except: [:show]
     end
   end
 

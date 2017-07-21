@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_course, except: [:new]
@@ -13,6 +15,7 @@ class BooksController < ApplicationController
   def show
     @conversations = @book.conversations
     authorize @book
+    # @chapter = open(@book.file).read
   end
 
   # GET /books/new

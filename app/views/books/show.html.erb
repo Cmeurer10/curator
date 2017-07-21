@@ -1,8 +1,12 @@
+
+
 <div class="platform">
 	<div class="row">
 		<div class="col-md-8">
 			<div class="book-content">
-				<p id="text" spellcheck="false"><%= @book.content %></p>
+	<!-- 			<p id="text" spellcheck="false"><%#=  @chapter.html_safe %></p> -->
+			<!-- 	<iframe src="<%= @book.file %>" frameborder="0"></iframe> -->
+			<object src="<%= @book.file %>" id="book-viewport"><embed src="<%= @book.file %>" id="text"></embed></object>
 				<div class="newConvoButton" id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
 					<%= image_tag "highlighter", class: "newConvoImage" %>	
 				</div>
@@ -216,6 +220,7 @@
 			    var selection= window.getSelection().getRangeAt(0);
 			    var selectedText = selection.extractContents();
 			    var span= document.createElement("span");
+			    span.setAttribute("id", "<%= @conversation.id %>");
 			    span.style.backgroundColor = "white";
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);

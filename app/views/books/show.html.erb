@@ -1,13 +1,11 @@
 
-
+<%= render "/books/platform-nav" %>
 <div class="platform">
 	<div class="row">
 		<div class="col-md-8">
-			<div class="book-content">
-	<!-- 			<p id="text" spellcheck="false"><%#=  @chapter.html_safe %></p> -->
-			<!-- 	<iframe src="<%= @book.file %>" frameborder="0"></iframe> -->
-			<object src="<%= @book.file %>" id="book-viewport"><embed src="<%= @book.file %>" id="text"></embed></object>
-				<div class="newConvoButton" id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
+			<div class="book-content" id= "text" spellcheck="false">
+				<%=  @chapter.html_safe%>
+				<div id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
 					<%= image_tag "highlighter", class: "newConvoImage" %>	
 				</div>
 			</div>

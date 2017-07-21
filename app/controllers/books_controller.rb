@@ -15,7 +15,9 @@ class BooksController < ApplicationController
   def show
     @conversations = @book.conversations
     authorize @book
-    # @chapter = open(@book.file).read
+
+  # TODO: Spinner with Jquery?
+    @chapter = open("https://storage.googleapis.com/the-curator/#{@book.file.path}").read.gsub(/<style.*<\/style>/, "")
   end
 
   # GET /books/new

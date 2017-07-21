@@ -1,6 +1,6 @@
 class CuratorshipsController < ApplicationController
   # TODO: add authorization
-  before_action :set_course
+  before_action :set_course, except: [:index]
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
@@ -26,6 +26,9 @@ class CuratorshipsController < ApplicationController
   end
 
   def destroy
+    @curatorship.user.role = 'student' if @curatorship.user.curatorships.first.nil?
+    @curatorship.destroy
+    redirect_to edit_course_path(@course)
   end
 
   private

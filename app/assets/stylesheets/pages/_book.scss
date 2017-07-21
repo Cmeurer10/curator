@@ -1,15 +1,19 @@
 .platform{
-	padding: 50px 35px;
+	padding: 10px 35px 50px 35px;
 	 background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 65%), asset_url('jumbotron.jpeg');
 	 background-size: cover;
 	 background-position: center;
+	 height: 100vh;
 }
 
 
 .book-content{
+    overflow-y: initial !important;
     height: 90vh;
+    overflow: scroll;
     background-color: white;
     box-shadow: $card-box-shadow;
+    padding: 50px;
     position: relative;
 
 }
@@ -74,10 +78,11 @@
 	box-shadow: $button-box-shadow;
 	height: 50px;
 	width: 50px;
-	position: absolute;
+	position: fixed;
 	bottom: 10px;
 	left: 10px;
 }
+
 #newConvo:hover{
 	cursor: pointer;
 }
@@ -90,11 +95,11 @@
 #convoClose{
 	text-align: left;
 }
-#book-viewport{
-	height: 100%;
-	width: 100%;
-}
-#text{
-	height: 100%;
-	width: 100%;
-}
+// #book-viewport{
+// 	height: 100%;
+// 	width: 100%;
+// }
+// #text{
+// 	height: 100%;
+// 	width: 100%;
+// }

@@ -64,7 +64,7 @@
 				<% @conversations.each do |convo| %>
 					// console.log(<%= convo.start_index %>);
 					// console.log(<%= convo.end_index %>);
-					selectAndHighlightRange("text", <%= convo.start_index %>, <%= convo.end_index %>)
+					selectAndHighlightRange("text", <%= convo.start_index %>, <%= convo.end_index %>, <%= convo.id.to_s %>)
 				<% end %>
 
 			}
@@ -116,7 +116,7 @@
 			    }
 			}
 
-			function makeEditableAndHighlight(colour) {
+			function makeEditableAndHighlight(colour, convo_id) {
 			    sel = window.getSelection();
 			    if (sel.rangeCount && sel.getRangeAt) {
 			        range = sel.getRangeAt(0);
@@ -130,19 +130,23 @@
 			    if (!document.execCommand("HiliteColor", false, colour)) {
 			        document.execCommand("BackColor", false, colour);
 			    }
+					var listId = window.getSelection().focusNode.parentNode;
+					$(listId).addClass("highlight");
+					$(listId).attr('id', "convo-" + convo_id);
 			    document.designMode = "off";
 			}
 
-			function highlight(colour) {
+			function highlight(colour, convo_id) {
 			    var range, sel;
 			    if (window.getSelection) {
 			        // IE9 and non-IE
 			        try {
 			            if (!document.execCommand("BackColor", false, colour)) {
-			                makeEditableAndHighlight(colour);
+			                makeEditableAndHighlight(colour, convo_id);
 			            }
+
 			        } catch (ex) {
-			            makeEditableAndHighlight(colour)
+			            makeEditableAndHighlight(colour, convo_id)
 			        }
 			    } else if (document.selection && document.selection.createRange) {
 			        // IE <= 8 case
@@ -151,9 +155,9 @@
 			    }
 			}
 
-			function selectAndHighlightRange(id, start, end) {
+			function selectAndHighlightRange(id, start, end, convo_id) {
 			    setSelectionRange(document.getElementById("text"), start, end);
-			    highlight("#D7D7D7");
+			    highlight("#D7D7D7", convo_id);
 			}
 
  	    $("a.threads").click(function(){
@@ -222,7 +226,8 @@
 			    span.style.backgroundColor = "white";
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
-			    span.setAttribute("class", "hightlighted");
+					// TODO: is this used?
+			    // span.setAttribute("class", "hightlighted");
 			    var start = ($('#text').text().search(selection));
 			    start = parseInt(start);
 			    var end = selection.toString().length + start;
@@ -291,8 +296,11 @@
 			// Curator.createThread(<%#= :topic %>, indexes.start, indexes.end);
 			// });
 
-		$("span").hover(function(){
-	    $(this).css("background-color", "pink");
+		$(".highlight").hover(function(){
+	    // $(this).css("background-color", "pink");
+			var convo_css_id = $(this).attr('id');
+			var convo_db_id = convo_css_id.slice(6,);
+			$("#convo-db-" + convo_db_id).toggleClass('hidden');
 		});
 	});
 

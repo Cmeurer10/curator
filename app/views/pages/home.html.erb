@@ -15,7 +15,11 @@
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit tenetur minima quam aliquid, laudantium. Earum assumenda, porro quos deleniti quasi tenetur repellendus consequatur sit nisi optio nemo tempora vero suscipit!
 			</p>
 			<div id = "signin-landing">
+			<% if user_signed_in? %>
+				<%= link_to t(".course", default: "Your Courses"), courses_path, class: "btn btn-lg signin-btn" %>
+			<% else %>
 				<%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-lg signin-btn" %>
+			<% end %>
 			</div>
 		</div>
 	</div>

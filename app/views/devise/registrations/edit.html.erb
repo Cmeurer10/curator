@@ -27,14 +27,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="user-details form">
+            <h2>Details:</h2>
             <ul>
-              <%= @user.courses_taken.each do |course| %>
-                <li>
-                  <%= course.name %>
+              <!-- TODO: List current Courses -->
+                <li class = "list-style-none padded-top">
+                  You've started <%= @user.conversations.count %> conversations
                 </li>
-              <% end %>
+                <li class = "list-style-none padded-top">
+                  You've posted <%= @user.posts.count %> <%= @user.posts.count == 1 ? "time" : "times" %>
+                </li>
+
              </ul>
           </div>
         </div>
@@ -42,6 +46,7 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <div class="form">
+        <div class="form-details">
         <h2>Edit Your Details</h2>
 
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -63,12 +68,10 @@
             <%= f.button :submit, "Update" %>
           </div>
         <% end %>
+      </div>
 
-        <h3>Cancel my account</h3>
-
-        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-        <%= link_to "Back", :back %>
+        <h3 class = "padded-top">Unhappy? </h3>
+        <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "link-no-style" %>
         
       </div>
     </div>

@@ -74,11 +74,11 @@ body{
 	bottom: 25px;
 
 }
-.book-action a{
-	color: #999999;
-	font-weight: lighter;
-	transition: color 0.3s ease;
-}
+// .book-action a{
+// 	color: #999999;
+// 	font-weight: lighter;
+// 	transition: color 0.3s ease;
+// }
 .book-action a:hover{
 	background: transparent !important;
   color: black !important;
@@ -96,4 +96,9 @@ body{
 }
 #course-action-drop:hover{
 	cursor: pointer;
+}
+.action{
+	color: #999999;
+	font-weight: lighter;
+	transition: color 0.3s ease;
 }

@@ -46,10 +46,10 @@
                         <h4><%= book.title %></h4>
                         <p><%= book.author %></p>
                         <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
-                          <div class="book-action">
-                            <%= link_to 'Edit', edit_course_book_path(course, book) %> | 
+                          <div>
+                            <%= link_to 'Edit', edit_course_book_path(course, book), class: "action"  %> | 
                             <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
-                                "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}%>
+                                "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %>
                           </div>
                         <% end %>
                       </div>

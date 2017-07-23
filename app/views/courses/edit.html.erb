@@ -18,7 +18,7 @@
             </ul>
             <p>
               <%= link_to "Add a curator", new_course_curatorship_path(@course),
-                  data: {confirm: "Are you sure you want to add a curator? They will share ownership rights with you."}, class: "link-no-style action" %>
+                  data: {confirm: "Are you sure you want to add a curator? They will share ownership rights with you."}, class: "link-no-style form-btn" %>
             </p>
           </div>
         </div>
@@ -38,7 +38,7 @@
               <% end %>
             </ul>
             <p>
-              <%= link_to "Add a stuent", new_course_enrollment_path(@course), class: "link-no-style action" %>
+              <%= link_to "Add a stuent", new_course_enrollment_path(@course), class: "link-no-style form-btn" %>
             </p>  
           </div>
         </div>

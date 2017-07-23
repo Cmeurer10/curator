@@ -36,3 +36,14 @@
 	color: $gray;
 	border-color: $gray;
 }
+.form{
+	background-color: white;
+	box-shadow: $card-box-shadow;
+	padding: 30px;
+	margin-top: 25px;
+}
+.form h2{
+	padding-bottom: 10px;
+	border-bottom: 1px solid $gray;
+	margin-top: 0px;
+}

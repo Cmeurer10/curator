@@ -1,7 +1,9 @@
 <div id='post-container'>
   <% if !@posts.nil? %>
+    <ul>
     <% @posts.each do |post| %>
-      <div class="post-card">
+      <li>
+        <div class="post-card">
         <div class="poster-info">
           <div class="poster-avatar">
             <% if post.user.facebook_picture_url %>
@@ -30,8 +32,10 @@
             <% end %>
         </div>
       </div>
-
+      </li>
     <% end %>
+      
+    </ul>
   <% end %>
   <%= render "/posts/form", locals: {post: @post, book: @book, conversation: @conversation} %>
   <% if @conversation.user == current_user || ['admin', 'curator'].include?(current_user.role) %>

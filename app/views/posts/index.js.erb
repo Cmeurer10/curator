@@ -1,1 +1,25 @@
 $("#posts").html("<%= j render '/books/sidebar/posts', locals: {posts: @posts, book: @book, conversation: @conversation}%>");
+function refresh() {
+  	/* Act on the event */
+	$.ajax({
+	  type: "GET",
+	  url: "/books/<%= @book.id %>/conversations/<%= @conversation.id %>/posts",
+	  success: function(data) {
+  		$('#posts-container').empty();
+	    data.forEach( function(post) {
+	    	var time = Math.floor((Date.now() - Date.parse(post.updated_at))/60000); 
+	    	<% if !@posts.nil? %>
+	    		$('#posts-container').append("<li> <%=@conversation.posts.content%> posted <span class = 'date'>" + time + "min ago</span>) by <%= @conversation.posts.user %></li>");
+	    	<% end %>
+	    });
+	  },
+	  error: function(jqXHR) {
+	    console.error(jqXHR.responseText);
+	  }
+	});
+  };
+
+  };
+  $(document).ready(function () {
+  setInterval(refresh, 15000); // Every 1 second, the `refresh` function is called.
+});

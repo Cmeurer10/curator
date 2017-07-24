@@ -317,7 +317,8 @@
 			}
 		});
 
-		$(".highlight").click(function(){
+		$(".highlight").click(function(e){
+			// e.stopPropogation();
 			// $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
 			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);

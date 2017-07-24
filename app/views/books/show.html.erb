@@ -313,7 +313,41 @@
 	    // $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
 			var convo_db_id = convo_css_id.slice(6,);
-			$("#convo-db-" + convo_db_id).toggleClass('hidden');
+			// convo-instance active-convo hidden
+			// console.log($("#convo-db-" + convo_db_id).hasClass('active-convo'));
+			if ( !$("#convo-db-" + convo_db_id).hasClass('active-convo') ) {
+				var show = $("#convo-db-" + convo_db_id).hasClass('hidden');
+				if (show) {
+					$("#convo-db-" + convo_db_id).hide();
+					$("#convo-db-" + convo_db_id).removeClass('hidden');
+					$("#convo-db-" + convo_db_id).slideDown('slow');
+				} else {
+					$("#convo-db-" + convo_db_id).slideUp('slow', function() {
+						$("#convo-db-" + convo_db_id).addClass('hidden');
+						$("#convo-db-" + convo_db_id).show();
+					});
+				}
+			}
+		});
+
+		$(".highlight").click(function(e){
+			// e.stopPropogation();
+			// $(this).css("background-color", "pink");
+			var convo_css_id = $(this).attr('id');
+			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);
+			// console.log(convo_db_id);
+			// var convo_css_id = $(this).attr('id');
+			// var convo_db_id = convo_css_id.slice(6,);
+			$(".convo-instance").removeClass('active-convo');
+			var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convo_db_id+")");
+			not_hidden_nor_active.slideUp('slow', function() {
+				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").addClass('hidden');
+			});
+			$(convo_db_id).removeClass('hidden');
+			$(convo_db_id).addClass('active-convo');
+			if (!$('#conversation-container').is(':visible')) {;
+				$('#conversation-container').slideToggle("slow");
+			}
 		});
 	});
 

@@ -74,9 +74,10 @@ class ConversationsController < ApplicationController
   # DELETE /conversations/1.json
   def destroy
     authorize @conversation
+    set_book
     @conversation.destroy
     respond_to do |format|
-      format.html { redirect_to conversations_url, notice: 'Conversation was successfully destroyed.' }
+      format.html { redirect_to book_path(@book) }
       format.json { head :no_content }
     end
   end
@@ -85,6 +86,10 @@ class ConversationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
       @conversation = Conversation.find(params[:id])
+    end
+
+    def set_book
+      @book = @conversation.book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

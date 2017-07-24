@@ -5,9 +5,8 @@
 		<div class="col-md-8">
 			<div class="book-content" id= "text" spellcheck="false">
 				<%=  @chapter.html_safe%>
-				<div id="newConvo" data-toggle="modal" data-target=".bs-example-modal-sm">
-
-					<%= image_tag "highlighter", class: "newConvoImage" %>	
+				<div id="newConvo" data-toggle="modal" data-target="#new-convo-modal">
+					<%= image_tag "highlighter", class: "newConvoImage" %>
 				</div>
 			</div>
 		</div>
@@ -38,7 +37,7 @@
 
 
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id='new-convo-modal'>
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
     	<div class="modal-header">
@@ -47,6 +46,20 @@
       	</div>
       	<div class="modal-body">
 	        <%= render "/conversations/form" %>
+      	</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id='new-convo-modal-on-existing'>
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+    	<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        	<h4 class="modal-title" id="myModalLabelOnExisting">Start a Conversation</h4>
+      	</div>
+      	<div class="modal-body">
+	        <%= render "/conversations/child_form" %>
       	</div>
     </div>
   </div>
@@ -65,7 +78,7 @@
 
      	highlightExistingConvos();
 			function highlightExistingConvos(){
-				<% @conversations.each do |convo| %>
+				<% @conversations.where(parent_id: nil).each do |convo| %>
 					// console.log(<%= convo.start_index %>);
 					// console.log(<%= convo.end_index %>);
 					selectAndHighlightRange("text", <%= convo.start_index %>, <%= convo.end_index %>, <%= convo.id.to_s %>)
@@ -247,8 +260,8 @@
 			    end = parseInt(end);
 			    // var topic = selection.toString();
 			    // console.log(topic);
-			    console.log(start);
-			    console.log(end);
+			    // console.log(start);
+			    // console.log(end);
 			    var indexes = {};
 			    	indexes.start = start;
 			    	indexes.end = end;
@@ -312,19 +325,33 @@
 		$(".highlight").hover(function(){
 	    // $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
-			var convo_db_id = convo_css_id.slice(6,);
+			var convo_db_id_child = ".parent-convo-" + convo_css_id.slice(6,);
+			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);
 			// convo-instance active-convo hidden
 			// console.log($("#convo-db-" + convo_db_id).hasClass('active-convo'));
-			if ( !$("#convo-db-" + convo_db_id).hasClass('active-convo') ) {
-				var show = $("#convo-db-" + convo_db_id).hasClass('hidden');
+			if ( !$(convo_db_id_child).hasClass('active-convo') ) {
+				var show = $(convo_db_id_child).hasClass('hidden');
 				if (show) {
-					$("#convo-db-" + convo_db_id).hide();
-					$("#convo-db-" + convo_db_id).removeClass('hidden');
-					$("#convo-db-" + convo_db_id).slideDown('slow');
+					$(convo_db_id_child).hide();
+					$(convo_db_id_child).removeClass('hidden');
+					$(convo_db_id_child).slideDown('slow');
 				} else {
-					$("#convo-db-" + convo_db_id).slideUp('slow', function() {
-						$("#convo-db-" + convo_db_id).addClass('hidden');
-						$("#convo-db-" + convo_db_id).show();
+					$(convo_db_id_child).slideUp('slow', function() {
+						$(convo_db_id_child).addClass('hidden');
+						$(convo_db_id_child).show();
+					});
+				}
+			}
+			if ( !$(convo_db_id).hasClass('active-convo') ) {
+				var show = $(convo_db_id).hasClass('hidden');
+				if (show) {
+					$(convo_db_id).hide();
+					$(convo_db_id).removeClass('hidden');
+					$(convo_db_id).slideDown('slow');
+				} else {
+					$(convo_db_id).slideUp('slow', function() {
+						$(convo_db_id).addClass('hidden');
+						$(convo_db_id).show();
 					});
 				}
 			}
@@ -334,23 +361,35 @@
 			// e.stopPropogation();
 			// $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
+			var convo_db_id_child = ".parent-convo-" + convo_css_id.slice(6,);
 			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);
 			// console.log(convo_db_id);
 			// var convo_css_id = $(this).attr('id');
 			// var convo_db_id = convo_css_id.slice(6,);
 			$(".convo-instance").removeClass('active-convo');
-			var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convo_db_id+")");
+			var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convo_db_id+")").filter(".convo-instance:not("+convo_db_id_child+")");
 			not_hidden_nor_active.slideUp('slow', function() {
-				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").addClass('hidden');
+				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").addClass('hidden').filter(".convo-instance:not("+convo_db_id_child+")");
 			});
+			$(convo_db_id_child).removeClass('hidden');
+			$(convo_db_id_child).addClass('active-convo');
 			$(convo_db_id).removeClass('hidden');
 			$(convo_db_id).addClass('active-convo');
 			if (!$('#conversation-container').is(':visible')) {;
 				$('#conversation-container').slideToggle("slow");
 			}
 		});
-	});
 
+		$('#new-convo-on-existing').click(function(){
+			// $('#conversation_start_index').val(start);
+			// $('#conversation_end_index').val(end);
+			var parent_index = $('.active-convo').attr('id').slice(9,);
+			$('#conversation_parent_id').val(parent_index);
+			// console.log(parent_index);
+			$('#new-convo-modal-on-existing').modal('show');
+		});
+
+	});
 
 
   </script>

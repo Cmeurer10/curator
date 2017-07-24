@@ -61,6 +61,12 @@ class PostsController < ApplicationController
       end
     end
   end
+  def refresh_part
+  # get whatever data you need to a variable named @data
+  respond_to do |format|
+    format.js
+  end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.

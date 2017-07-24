@@ -25,9 +25,11 @@
 					<div class="title">
 						<i class="fa fa-minus inline" aria-hidden="true" id="post-glyph"></i>
 						<h2 id="post-clickable"></h2>
+						<p id = "refresh">Refresh</p>
 					</div>
 					<div id="posts">
 					<!-- Content goes here from Posts -->
+
 					</div>
 				</div>
 			</div>
@@ -72,6 +74,15 @@
 
 
      $(document).ready(function(){
+
+     	var $posts = $('#posts');
+
+     	if ( !$.isEmptyObject($posts)) {
+     		console.log("HELLO");
+     		setInterval(postRefresh(), 3000);
+     	}
+     	
+
      	function changeHighlighterColor(color){
 
      	}
@@ -364,6 +375,7 @@
 			not_hidden_nor_active.slideUp('slow', function() {
 				not_hidden_nor_active.filter(".convo-instance:not("+convoElements['convo_db_id']+")").filter(".convo-instance:not("+convoElements['convo_db_id_child']+")").addClass('hidden');
 			});
+
 			$(convoElements['convo_db_id_child']).removeClass('hidden');
 			$(convoElements['convo_db_id_child']).addClass('active-convo');
 			$(convoElements['convo_db_id']).removeClass('hidden');
@@ -373,6 +385,7 @@
 			}
 		});
 
+
 		$('#new-convo-on-existing').click(function(){
 			var parent_index = $('.active-convo').attr('id').slice(9,);
 			$('#conversation_parent_id').val(parent_index);
@@ -380,9 +393,23 @@
 		});
 
 	});
+		function postRefresh() {{
+    /* Act on the event */
+		    console.log("Hey!");
+		  $.ajax({
+		    type: "GET",
+		    url: "/books/<%= @book.id %>/conversations/<%= @conversation.id %>/posts/refresh_part",
+		  });
+		  };
+
+		  };
+
+
 
 
 
   </script>
 
 <% end %>
+
+

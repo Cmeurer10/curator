@@ -4,13 +4,24 @@ class PostPolicy < ApplicationPolicy
       if admin?
         scope.all
       elsif curator?
-        user_acessible_posts = []
-        user.books_as_curator.each{ |book| user_acessible_posts.push(*book.posts) }
-        scope.where(conversation: user_acessible_posts)
+        # if user.courses_curated_ids.count > 1
+        #   array = user.courses_curated_ids
+        # else
+        #   array = [user.courses_curated.first.id]
+        # end
+        scope.joins(conversation: {book: :course}).where(books: {course_id: user.courses_curated_ids})
+        # scope.where(conversation: { book: {course_id: user.courses_curated_ids}})
+
+        # user_acessible_posts = []
+        # user.books_as_curator.each{ |book| user_acessible_posts.push(*book.posts) }
+        # scope.where(conversation: user_acessible_posts)
       else
-        user_acessible_posts = []
-        user.books_as_student.each{ |book| user_acessible_posts.push(*book.posts) }
-        scope.where(conversation: user_acessible_posts)
+        scope.joins(conversation: {book: :course}).where(books: {course_id: user.courses_taken_ids})
+        # scope.includes(conversation: {book: :course}).where(conversation: { books: {course_id: user.courses_taken_ids}})
+
+        # user_acessible_posts = []
+        # user.books_as_student.each{ |book| user_acessible_posts.push(*book.posts) }
+        # scope.where(conversation: user_acessible_posts)
       end
     end
   end

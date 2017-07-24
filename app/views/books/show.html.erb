@@ -300,7 +300,22 @@
 	    // $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
 			var convo_db_id = convo_css_id.slice(6,);
-			$("#convo-db-" + convo_db_id).toggleClass('hidden');
+			// convo-instance active-convo hidden
+			console.log($("#convo-db-" + convo_db_id).hasClass('active-convo'));
+			if ( !$("#convo-db-" + convo_db_id).hasClass('active-convo') ) {
+				$("#convo-db-" + convo_db_id).toggleClass('hidden');
+			}
+		});
+
+		$(".highlight").click(function(){
+			// $(this).css("background-color", "pink");
+			var convo_css_id = $(this).attr('id');
+			var convo_db_id = convo_css_id.slice(6,);
+			console.log(convo_db_id);
+			// var convo_css_id = $(this).attr('id');
+			// var convo_db_id = convo_css_id.slice(6,);
+			$(".convo-instance").removeClass('active-convo');
+			$("#convo-db-" + convo_db_id).addClass('active-convo');
 		});
 	});
 

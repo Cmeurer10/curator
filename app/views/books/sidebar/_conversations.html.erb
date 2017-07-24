@@ -2,7 +2,7 @@
 
   <div class="conversation-threads-container">
     <% @book.conversations.each do |convo| %>
-      <div id="convo-db-<%= convo.id %>" class='hidden'>
+      <div id="convo-db-<%= convo.id %>" class='hidden convo-instance'>
     	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
     	  <% button_color = colors.sample %>
   	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),

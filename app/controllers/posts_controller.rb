@@ -1,19 +1,26 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:update, :destroy]
-  before_action :set_conversation, only: [:index, :create, :destroy]
-  before_action :set_book, only: [:index, :create, :destroy]
+  before_action :set_conversation, only: [:index, :create, :destroy, :refresh_part]
+  before_action :set_book, only: [:index, :create, :destroy, :refresh_part]
+
+  skip_after_action :verify_authorized, only: [:refresh_part]
+  after_action :verify_policy_scoped, only: [:refresh_part]
 
   def index
     @posts = policy_scope(Post).where(conversation: @conversation)
     @post = Post.new
     respond_to do |format|
-      format.html
+      # format.html
       format.js
     end
   end
 
   def show
     authorize @post
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 
@@ -63,6 +70,7 @@ class PostsController < ApplicationController
   end
   def refresh_part
   # get whatever data you need to a variable named @data
+   @posts = policy_scope(Post).where(conversation: @conversation)
   respond_to do |format|
     format.js
   end

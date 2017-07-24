@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   resources :books, only: [:show] do
     resources :conversations, only: [:update, :destroy, :create] do
-      resources :posts, only: [:index, :update, :destroy, :create]
+      resources :posts, only: [:index, :update, :destroy, :create] do
+        get '/refresh_part', to: 'posts#refresh_part', on: :collection
+      end
     end
   end
 

@@ -31,6 +31,9 @@
 					<!-- Content goes here from Posts -->
 
 					</div>
+					<div id="post-comment">
+					  
+					</div>
 				</div>
 			</div>
 		</div>
@@ -75,12 +78,8 @@
 
      $(document).ready(function(){
 
-     	var $posts = $('#posts');
-
-     	if ( !$.isEmptyObject($posts)) {
-     		console.log("HELLO");
-     		setInterval(postRefresh(), 3000);
-     	}
+     
+     	
      	
 
      	function changeHighlighterColor(color){
@@ -189,11 +188,16 @@
 
  	    $("a.threads").click(function(){
  	    	var topic = $(this).text();
+ 	    	var convo = $(this).attr('id');
 	        $('#conversation-container').slideUp("slow");
 	        $("#convo-glyph").removeClass('fa fa-minus inline');
 	        $("#convo-glyph").addClass('fa fa-plus inline');
 	        $(".posts-container").removeClass('hidden');
 	        $("#post-clickable").text(topic);
+	        // refresh(convo);
+	        setTimeout(function() {
+	        	postRefresh(convo)
+	        }, 1000);
 	        // setInterval(refresh, 1000);
 
 		});
@@ -289,7 +293,7 @@
 			 //      type: "POST",
 			 //      url: "/books/<%= @book.id %>/conversations",
 			 //      data: {  conversation: { topic: topic, start_index: start_index, end_index: end_index, user_id: "<%= current_user.id %>", book_id: "<%= @book.id %>" }},
-			 //    //   success:function(data) {
+			    // //   success:function(data) {
 			    //     alert(data.id)
 			    //     return false
 			    // }
@@ -393,12 +397,21 @@
 		});
 
 	});
-		function postRefresh() {{
-    /* Act on the event */
-		    console.log("Hey!");
+
+	var timeOut = null;
+
+		function postRefresh(convo) {{
+		   
 		  $.ajax({
 		    type: "GET",
-		    url: "/books/<%= @book.id %>/conversations/<%= @conversation.id %>/posts/refresh_part",
+		    url: "/books/<%= @book.id %>/conversations/" + convo + "/posts/refresh_part",
+		    success:function(data) {
+		         	        timeOut = setTimeout(function() {
+					        	postRefresh(convo)
+					        }, 3000);
+		         	        // timeOut = setTimeout(postRefresh(convo), 1000);
+			        return false
+			    }
 		  });
 		  };
 

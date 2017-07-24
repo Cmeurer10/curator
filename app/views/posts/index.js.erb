@@ -1,2 +1,4 @@
 $("#posts").html("<%= j render '/books/sidebar/posts', locals: {posts: @posts, book: @book, conversation: @conversation}%>");
+$("#post-comment").html("<%= j render '/posts/form', locals: {post: @post, book: @book, conversation: @conversation}%>");
+
 

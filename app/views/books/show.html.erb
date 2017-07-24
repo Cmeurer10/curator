@@ -25,7 +25,6 @@
 					<div class="title">
 						<i class="fa fa-minus inline" aria-hidden="true" id="post-glyph"></i>
 						<h2 id="post-clickable"></h2>
-						<p id = "refresh">Refresh</p>
 					</div>
 					<div id="posts">
 					<!-- Content goes here from Posts -->
@@ -56,19 +55,7 @@
   </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id='new-convo-modal-on-existing'>
-  <div class="modal-dialog modal-md" role="document">
-    <div class="modal-content">
-    	<div class="modal-header">
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        	<h4 class="modal-title" id="myModalLabelOnExisting">Start a Conversation</h4>
-      	</div>
-      	<div class="modal-body">
-	        <%= render "/conversations/child_form" %>
-      	</div>
-    </div>
-  </div>
-</div>
+
 
 
 
@@ -78,7 +65,12 @@
 
      $(document).ready(function(){
 
-     
+     $('#submit').click(function(e) {
+    	// e.preventDefault();
+    	// Coding
+    	$('#new-convo-modal').modal('toggle'); //or  $('#IDModal').modal('hide');
+    	// return false;
+	});
      	
      	
 

@@ -52,34 +52,34 @@ users.each do |user|
   user.save
 end
 
-# Book creation
-books = []
-2.times do
-  content = ""
-  rand(5..7).times do
-    content += Faker::Lorem.paragraph(rand(4..7)) + '\n'
-  end
-  books << Book.create(title: Faker::Book.title, author: Faker::Book.author,
-              publisher: Faker::Book.publisher, course: course,
-              content: content[0..-3])
-end
-
-# Conversation creation
-conversations = []
-books.each do |book|
-  num = rand(2..6)
-  num.times do
-    start_index = ((book.content.length * rand(1..12) / 15).floor).to_i
-    conversations << Conversation.create(topic: Faker::Lorem.sentence,
-                     start_index: start_index, end_index: start_index + rand(10..20),
-                     book: book, user: users.select(&:student?).sample)
-  end
-end
-
-# Post creation
-conversations.each do |conv|
-  rand(1..3).times do
-    Post.create(content: Faker::Lorem.paragraph, conversation: conv,
-                user: users.select(&:student?).sample)
-  end
-end
+# # Book creation
+# books = []
+# 2.times do
+#   content = ""
+#   rand(5..7).times do
+#     content += Faker::Lorem.paragraph(rand(4..7)) + '\n'
+#   end
+#   books << Book.create(title: Faker::Book.title, author: Faker::Book.author,
+#               publisher: Faker::Book.publisher, course: course,
+#               content: content[0..-3])
+# end
+#
+# # Conversation creation
+# conversations = []
+# books.each do |book|
+#   num = rand(2..6)
+#   num.times do
+#     start_index = ((book.content.length * rand(1..12) / 15).floor).to_i
+#     conversations << Conversation.create(topic: Faker::Lorem.sentence,
+#                      start_index: start_index, end_index: start_index + rand(10..20),
+#                      book: book, user: users.select(&:student?).sample)
+#   end
+# end
+#
+# # Post creation
+# conversations.each do |conv|
+#   rand(1..3).times do
+#     Post.create(content: Faker::Lorem.paragraph, conversation: conv,
+#                 user: users.select(&:student?).sample)
+#   end
+# end

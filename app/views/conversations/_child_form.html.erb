@@ -4,8 +4,7 @@
 
   <div class="form-inputs">
   	<%= f.label "Topic/Question" %>
-  	<%= f.hidden_field :start_index, value: "" %>
-  	<%= f.hidden_field :end_index, value: "" %>
+  	<%= f.hidden_field :parent_id, value: "" %>
     <!-- # TODO: move to controller rather than hidden_field-->
   	<%= f.hidden_field :book_id, value: @book.id %>
     <!-- # TODO: move to controller rather than hidden_field-->

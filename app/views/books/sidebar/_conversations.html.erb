@@ -2,12 +2,16 @@
 
   <div class="conversation-threads-container">
     <% @book.conversations.each do |convo| %>
-      <div id="convo-db-<%= convo.id %>" class='hidden convo-instance'>
+    <% convo_relative = convo.parent_id.present? ? "parent-convo-" + convo.parent_id.to_s : "" %>
+      <div id="convo-db-<%= convo.id %>" class='hidden convo-instance <%= convo_relative %>'>
     	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
     	  <% button_color = colors.sample %>
   	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),
             remote: true, class: "btn #{button_color} threads" %>
       </div>
     <% end %>
+  </div>
+  <div id='new-convo-on-existing'>
+    <div class="btn btn-primary">Click Here</div>
   </div>
 </div>

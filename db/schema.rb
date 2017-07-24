@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170721030044) do
     t.string   "topic"
     t.integer  "start_index"
     t.integer  "end_index"
+    t.integer  "parent_id"
     t.integer  "book_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false

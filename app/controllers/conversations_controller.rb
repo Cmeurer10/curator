@@ -36,7 +36,7 @@ class ConversationsController < ApplicationController
     authorize @conversation
 
     respond_to do |format|
-      if @conversation.save
+      if @conversation.save!
         # format.html { redirect_to @conversation.book, notice: 'Conversation was successfully created.' }
         # format.html { redirect_to "/books/#{@conversation.book_id}", notice: 'Conversation was successfully created.' }
         # format.html { render partial: "/books/sidebar/conversations", notice: 'Conversation was successfully updated.' }
@@ -75,6 +75,21 @@ class ConversationsController < ApplicationController
   def destroy
     authorize @conversation
     set_book
+    unless Conversation.where(parent_id: @conversation.id).empty?
+      child_conversations = Conversation.where(parent_id: @conversation.id).to_a
+      new_parent = child_conversations.sample
+      new_parent.start_index = @conversation.start_index
+      new_parent.end_index = @conversation.end_index
+      new_parent.parent_id = nil
+      if child_conversations.length > 1
+        child_conversations.reject! { |c| c == new_parent }
+        child_conversations.each do |c|
+          c.parent_id = new_parent.id
+          c.save
+        end
+      end
+      new_parent.save
+    end
     @conversation.destroy
     respond_to do |format|
       format.html { redirect_to book_path(@book) }
@@ -95,6 +110,7 @@ class ConversationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def conversation_params
 
-      params.require(:conversation).permit(:book_id, :topic, :start_index, :end_index, :user_id)
+      params.require(:conversation).permit(:book_id, :topic, :start_index,
+      :end_index, :user_id, :parent_id)
     end
 end

@@ -325,8 +325,10 @@
 			// var convo_css_id = $(this).attr('id');
 			// var convo_db_id = convo_css_id.slice(6,);
 			$(".convo-instance").removeClass('active-convo');
-			$(".convo-instance:not(.hidden)").filter(".convo-instance:not(#"+convo_db_id+")").slideUp('slow');
-			$(".convo-instance:not(.hidden)").addClass('hidden');
+			var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convo_db_id+")");
+			not_hidden_nor_active.slideUp('slow', function() {
+				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").addClass('hidden');
+			});
 			$(convo_db_id).removeClass('hidden');
 			$(convo_db_id).addClass('active-convo');
 			if (!$('#conversation-container').is(':visible')) {;

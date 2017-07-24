@@ -76,7 +76,7 @@ class ConversationsController < ApplicationController
     authorize @conversation
     @conversation.destroy
     respond_to do |format|
-      format.html { redirect_to conversations_url, notice: 'Conversation was successfully destroyed.' }
+      format.html { redirect_to book_path, notice: 'Thread was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

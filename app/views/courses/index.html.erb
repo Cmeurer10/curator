@@ -1,15 +1,86 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
+  <% @courses.each do |course| %>
+    <div class="row">
+      <div class="course-card">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="course-card-header">
+              <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
+                <div class="dropdown-toggle course-header-element" id="course-action-drop" data-toggle="dropdown">
+                  <p>Details</p>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu">
+                  <li><%= link_to "Add a book", new_course_book_path(course) %> </li>
+                  <li><%= link_to 'Edit Course Details', edit_course_path(course) %></li>
+                  <li><%= link_to 'Delete Course', course_path(course), method: :delete, data: {confirm:
+                   "Are you sure? All books in this course and their respective discussions will be lost!"} %></li>
+                </ul>
+              <% end %>
+              <div class="course-header-element">
+                <h2><%= course.name %></h2>
+              </div>
+              <div class="course-header-element">
+                  <ul class = "list-inline">
+                      <% course.curators.each do |curator| %>
+                         <li class="list-inline-item"><%= curator.first_name %> <%= curator.last_name %></li>
+                      <% end %>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="books-container">
+              <% course.books.each do |book| %>
+                <%= link_to book_path(book) do %>
+                  
+                    <div class="book-card">
+                      <div class="book-card-pic" style="background-image:
+                               url(<%#= cl_image_path book.cover_photo, :default_image => "math.svg" %>
+                                    <%= image_path("math.svg") %>)";>
+                      </div>
+                      <div class="book-info">
+                        <h4><%= book.title %></h4>
+                        <p><%= book.author %></p>
+                        <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
+                          <div>
+                            <%= link_to 'Edit', edit_course_book_path(course, book), class: "action"  %> | 
+                            <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
+                                "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %>
+                          </div>
+                        <% end %>
+                      </div>
+                      
+                    </div> 
+                  
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
 
-    <% @courses.each do |course| %>
-     <div class="row">
+
+
+
+
+
+
+
+
+
+
+
+<!--      <div class="row">
         <div class="col-md-6 col-xs-12 course-card">
           <div class="row">
               <div class="col-md-5 col-xs-6">
-                <div class="course-card-pic">
-                  <%= image_tag "math.svg" %>
-                  <h4><strong>Course:</strong></h4>
+                <div class="course-card-information">
+                  <h2><strong>Course:</strong></h4>
                   <p><%= course.name %></p>
                 </div>
               </div>
@@ -60,7 +131,7 @@
                 <% end %>
             </div>
         </div>
-    </div>
+    </div> -->
   <% end %>
 </div>
 

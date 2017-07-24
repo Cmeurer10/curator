@@ -1,4 +1,5 @@
 $("#conversations").html("<%= j render '/books/sidebar/conversations', locals: {conversations: @conversations, book: @book}%>");
+
 highlightConvo();
 
 
@@ -92,5 +93,5 @@ highlightConvo();
 
 	function selectAndHighlightRange(id, start, end) {
 	    setSelectionRange(document.getElementById("text"), start, end);
-	    highlight("#D7D7D7");
+	    highlight("<%= current_user.highlight_color %>");
 	}

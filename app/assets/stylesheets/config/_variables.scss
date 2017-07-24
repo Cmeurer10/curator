@@ -107,3 +107,21 @@ $button-box-shadow: 2px 5px 9px $gray;
 	box-shadow: $button-box-shadow;
 	padding: 1px 4px !important;
 }
+.link-no-style{
+	text-decoration: none;
+	color: black;
+}
+.link-no-style:hover{
+	color: $gray;
+}
+.padded-top{
+	padding-top: 15px;
+}
+.list-style-none{
+	list-style: none;
+}
+.action{
+	color: #999999 !important;
+	font-weight: lighter !important;
+	transition: color 0.3s ease !important
+}

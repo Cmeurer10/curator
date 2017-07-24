@@ -9,18 +9,26 @@
 body{
 	background-color: #F3F3F3;
 }
-
-.course-card-pic img{
-	width: 100%;
-	margin-bottom: 15px;
+.course-card-header{
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
+.course-card-header p {
+	padding-top: 10px;
+}
+.course-card-header h2{
+	margin-top: 5px;
+	margin-bottom: 3px;
+}
 
 .books-collapse{
 	width: 100%;
 	text-align: center;
 	position: absolute;
 	bottom: 0px;
+
 }
 .course-card-information{
 	padding-top: 54px;
@@ -29,27 +37,67 @@ body{
 	list-style: none;
 }
 .book-card{
-	height: 400px;
-	margin-top: 20px;
+	height: 225px;
+	width: 368px;
+	// margin-top: 20px;
+	// margin-bottom: 20px;
 	background-size: cover;
 	background-position: center;
+	padding: 10px;
+	display: flex;
+	margin: 10px;
+	box-shadow: $card-box-shadow;
 }
 .book-card a{
 	text-decoration: none;
 	color: black;
 }
+.book-card h4{
+	font-size: 27px;
+}
+
 .book-card-pic{
-	height: 150px;
+	height: 200px;
+	width: 100px;
 }
-.course-card-pic{
-	padding: 10px;
-}
+// .course-card-pic{
+// 	padding: 10px;
+// }
 .actions{
 	position: absolute;
 	top: 10px;
 	right: 10px;
 }
+
 .book-action{
 	position: absolute;
 	bottom: 25px;
+
+}
+// .book-action a{
+// 	color: #999999;
+// 	font-weight: lighter;
+// 	transition: color 0.3s ease;
+// }
+.book-action a:hover{
+	background: transparent !important;
+  color: black !important;
+}
+.books-container{
+	display: flex;
+	flex-wrap: wrap;
+}
+.book-info{
+	margin-left: 30px;
+}
+.course-header-element {
+	padding: 0 10px;
+}
+#course-action-drop:hover{
+	cursor: pointer;
+}
+.action{
+	color: #999999;
+	font-weight: lighter;
+	transition: color 0.3s ease;
 }

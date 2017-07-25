@@ -81,17 +81,20 @@
 
      $('#submit').click(function(e) {
     	// e.preventDefault();
+    	$('#new-convo-modal').modal('toggle'); //or  $('#IDModal').modal('hide');
+    	$('#conversation').load("/books/refreshConvos")
+    	
+    	// return false;
+	});
+      $('#new-convo-submit').click(function(e) {
+    	// e.preventDefault();
     	// Coding
-    	$('#new-convo-modal').modal('hide'); //or  $('#IDModal').modal('hide');
-    	$('#new-convo-modal-on-existing').modal('hide'); //or  $('#IDModal').modal('hide');
+    	$('#new-convo-modal-on-existing').modal('toggle'); //or  $('#IDModal').modal('hide');
     	// return false;
 	});
 
 
 
-     	function changeHighlighterColor(color){
-
-     	}
 
      	highlightExistingConvos();
 			function highlightExistingConvos(){
@@ -240,9 +243,6 @@
 			         $('#post-glyph').toggleClass('fa fa-minus');
 			    }
 		});
-		$('#hl-blue').click(function(event) {
-			$('.hightlighted').addClass('hl-blue');
-			});
 
 		// });
 			// if(Curator === undefined){
@@ -250,7 +250,10 @@
 		     // }
 		$("#newConvo").click(function(event) {
 			/* Act on the event */
+
 			Curator.getHighlightRange();
+			addHighlightEventListener();
+
 		});
 		 // $(document).bind('keypress',pressed);
 		    var userSelection;
@@ -274,7 +277,7 @@
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
 			    span.setAttribute("class", "hightlighted");
-
+			    
 			    var start = ($('#text').text().search(selection));
 			    start = parseInt(start);
 			    var end = selection.toString().length + start;
@@ -284,6 +287,7 @@
 			    	indexes.end = end;
 			    $('#conversation_start_index').val(start);
 			    $('#conversation_end_index').val(end);
+			    
 
 			    }
 			// Curator.highlightRange=function(){
@@ -397,6 +401,10 @@
 		});
 
 
+		
+
+
+
 		$('#new-convo-on-existing').click(function(){
 			var parent_index = $('.active-convo').attr('id').slice(9,);
 			$('#conversation_parent_id').val(parent_index);
@@ -405,6 +413,66 @@
 
 	});
 
+		function addHighlightEventListener(){
+		  function slide_show(ele) {
+			var show = $(ele).hasClass('hidden');
+			if (show) {
+				$(ele).hide();
+				$(ele).removeClass('hidden');
+				$(ele).slideDown(400);
+			} else {
+				$(ele).slideUp(400, function() {
+					$(ele).addClass('hidden');
+					$(ele).show();
+				});
+			};
+		};
+
+		function getConvoElements(ele) {
+			var a = $(ele).attr('id');
+			var b = ".parent-convo-" + a.slice(6,);
+			var c = "#convo-db-" + a.slice(6,);
+			return {convo_css_id: a, convo_db_id_child: b, convo_db_id: c }
+		}
+			$(".hightlighted").off();
+			$(".hightlighted").hover(
+					function() {
+						convoElements = getConvoElements(this);
+						if (!$(convoElements['convo_db_id']).hasClass('active-convo')){
+							$(this).css("background-color", "yellow");
+							slide_show(convoElements['convo_db_id_child']);
+							slide_show(convoElements['convo_db_id']);
+						}
+					}, function() {
+						convoElements = getConvoElements(this);
+						if (!$(convoElements['convo_db_id']).hasClass('active-convo')){
+							slide_show(convoElements['convo_db_id_child']);
+							slide_show(convoElements['convo_db_id']);
+							$(this).css("background-color", "#D7D7D7");
+						}
+					}
+				);
+
+				$(".hightlighted").click(function(e){
+					$(".hightlighted").css("background-color", "#D7D7D7");
+					$(this).css("background-color", "pink");
+					$(".convo-instance").removeClass('active-convo');
+					var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convoElements['convo_db_id']+")").filter(".convo-instance:not("+convoElements['convo_db_id_child']+")");
+					not_hidden_nor_active.slideUp('slow', function() {
+						not_hidden_nor_active.filter(".convo-instance:not("+convoElements['convo_db_id']+")").filter(".convo-instance:not("+convoElements['convo_db_id_child']+")").addClass('hidden');
+					});
+
+					$(convoElements['convo_db_id_child']).removeClass('hidden');
+					$(convoElements['convo_db_id_child']).addClass('active-convo');
+					$(convoElements['convo_db_id']).removeClass('hidden');
+					$(convoElements['convo_db_id']).addClass('active-convo');
+					if (!$('#conversation-container').is(':visible')) {;
+						$('#conversation-container').slideToggle("slow");
+					}
+				});
+
+		}	
+  
 
 	var timeOut = null;
 
@@ -421,6 +489,16 @@
 			        return false
 			    }
 		  });
+		  };
+
+		  };
+
+		  function convoRefresh() {{
+
+		  $.ajax({
+		    type: "GET",
+		    url: "/books/<%= @book.id %>/conversations/"
+		  	});
 		  };
 
 		  };

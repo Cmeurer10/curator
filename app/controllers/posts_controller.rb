@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:update, :destroy]
-  before_action :set_conversation, only: [:index, :create, :destroy, :refresh_part]
-  before_action :set_book, only: [:index, :create, :destroy, :refresh_part]
+  before_action :set_post, only: [:update, :destroy, :upvote]
+  before_action :set_conversation, only: [:index, :create, :destroy, :refresh_part, :upvote]
+  before_action :set_book, only: [:index, :create, :destroy, :refresh_part, :upvote]
 
-  skip_after_action :verify_authorized, only: [:refresh_part]
+  skip_after_action :verify_authorized, only: [:refresh_part, :upvote]
   after_action :verify_policy_scoped, only: [:refresh_part]
 
   def index
@@ -68,18 +68,29 @@ class PostsController < ApplicationController
       end
     end
   end
+
   def refresh_part
-  # get whatever data you need to a variable named @data
-   @posts = policy_scope(Post).where(conversation: @conversation)
-  respond_to do |format|
-    format.js
+    # get whatever data you need to a variable named @data
+    @posts = policy_scope(Post).where(conversation: @conversation)
+    respond_to do |format|
+      format.js
+    end
   end
-end
+
+  def upvote
+    respond_to do |format|
+      @post.votes += 1
+      if @post.save!
+        @post = Post.new
+        format.js { render :index }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find(params[:post_id].nil? ? params[:id] : params[:post_id])
     end
 
     def set_conversation

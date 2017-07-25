@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:update, :destroy, :upvote]
-  before_action :set_conversation, only: [:index, :create, :destroy, :refresh_part, :upvote]
-  before_action :set_book, only: [:index, :create, :destroy, :refresh_part, :upvote]
+  before_action :set_conversation, only: [:index, :create, :update, :destroy, :refresh_part, :upvote]
+  before_action :set_book, only: [:index, :update, :create, :destroy, :refresh_part, :upvote]
 
-  skip_after_action :verify_authorized, only: [:refresh_part, :upvote]
+  skip_after_action :verify_authorized, only: [:refresh_part]
   after_action :verify_policy_scoped, only: [:refresh_part]
 
   def index
     @posts = policy_scope(Post).where(conversation: @conversation)
-    @post = Post.new
+    @post = params[:post_id].nil? ? Post.new : Post.find(params[:post_id])
     respond_to do |format|
       # format.html
       format.js
@@ -46,14 +46,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize @post
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+      @post.update(post_params)
+      @post = Post.new
+      format.js { render :index }
     end
   end
 
@@ -78,6 +75,7 @@ class PostsController < ApplicationController
   end
 
   def upvote
+    authorize @post
     respond_to do |format|
       @post.votes += 1
       if @post.save!

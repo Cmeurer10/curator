@@ -1,5 +1,5 @@
 .platform{
-	padding: 10px 35px 50px 35px;
+	padding: 35px;
 	 background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 65%), asset_url('jumbotron.jpeg');
 	 background-size: cover;
 	 background-position: center;
@@ -12,7 +12,7 @@
     height: 90vh;
     overflow: scroll;
     background-color: white;
-    box-shadow: $card-box-shadow;
+    // box-shadow: $card-box-shadow;
     padding: 50px;
     position: relative;
 

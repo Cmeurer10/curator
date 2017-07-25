@@ -5,7 +5,7 @@
         <% if current_user.courses_curated.empty? && current_user.role == 'curator' %>
           <h3>No Courses yet</h3>
           <%= link_to "Start a New Course", new_course_path, class: "link-no-style" %>
-          <!-- ################################ -->
+      <!-- ################################ -->
         <% else %>
           <h3 class="border-bottom">Courses:</h3>
           <ul class = "list-unstyled">
@@ -13,26 +13,29 @@
               <li>
                 <div class="course-nav-card">
                   <ul class="list-unstyled">
+                  <li>
                     <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
-                        <div class="dropdown-toggle course-header-element inline" id="course-action-drop" data-toggle="dropdown">
+                      <div class="dropdown inline">
+                        <div class="dropdown-toggle course-header-element inline" id="course-action-drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                           <i class="fa fa-cog icon-gray" aria-hidden="true"></i>
                         </div>
-                        <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu nav-left-dropdown" aria-labelledby="course-action-drop">
                           <li><%= link_to "Add a book", new_course_book_path(course) %> </li>
                           <li><%= link_to 'Edit Course Details', edit_course_path(course) %></li>
                           <li><%= link_to 'Delete Course', course_path(course), method: :delete, data: {confirm:
                            "Are you sure? All books in this course and their respective discussions will be lost!"} %></li>
                         </ul>
+                      </div>
                     <% end %>
                     <h4 class = "inline bolder"><%= course.name %></h4>
                   </li>
-                    <ul class = "list-unstyled list-inline">
-                    <li ><h5 class = "course-header-element">Curators:</h5></li>
+                    <ul class = "list-unstyled list-inline padded-top">
+                    <li ><h5 class = "course-Coursheader-element">Curators:</h5></li>
                     <% course.curators.each do |curator| %>
                       <li>
                          <% if curator.facebook_picture_url %>
                           <% avatar_url = curator.facebook_picture_url %>
-                          <%= image_tag avatar_url, class: "avatar avatar-stack", "data-toogle" => "tooltip", "title" => curator.full_name %>
+                          <%= image_tag avatar_url, class: "avatar-large avatar-stack", "data-toogle" => "tooltip", "title" => curator.full_name %>
                         <% else %>
                           <div class="default-avatar background-default avatar-stack"  data-toggle="tooltip" title= <%= curator.full_name %>>
                             <p><%= curator.first_name[0].capitalize %></p>
@@ -49,21 +52,22 @@
       </div>
   </div>
   <div class="col-xs-9">
-    <!-- <div class="container"> -->
         <div class="row">
             <div class="col-xs-12">
               <div class="books-container">
                 <% @books.each do |book| %>
                   <div class="book-card">
                     <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
+                    <div class="dropdown">
+                      <div class="dropdown-toggle course-header-element inline fix-top-right" id="book-action-drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <i class="fa fa-cog icon-gray " aria-hidden="true"></i></div>
 
-                    <div class="dropdown-toggle course-header-element inline fix-top-right" id="course-action-drop" data-toggle="dropdown"><i class="fa fa-cog icon-gray " aria-hidden="true"></i></div>
-
-                    <ul class="dropdown-menu dropdown-menu-left navbar-wagon-dropdown-menu">
-                      <li><%= link_to 'Edit', edit_course_book_path(book.course, book), class: "action"  %> </li>
-                      <li><%= link_to 'Delete', course_book_path(book.course, book), method: :delete, data: {confirm:
-                          "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %></li>
-                    </ul>
+                      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu-right book-action-nav" aria-labelledby="book-action-drop">
+                        <li><%= link_to 'Edit', edit_course_book_path(book.course, book), class: "action"  %> </li>
+                        <li><%= link_to 'Delete', course_book_path(book.course, book), method: :delete, data: {confirm:
+                            "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %></li>
+                      </ul>
+                    </div>
                     
                 <% end %>
                   <%= link_to book_path(book) do %>
@@ -82,7 +86,6 @@
               </div>
             </div>
         </div>
-<!--       </div> -->
   </div>
 </div>
 

@@ -6,10 +6,10 @@
           <div class="form">
             <h2>Curators for <%= @course.name %></h2>
             <ul>
-              <% @course.curatorships.each do |curatorship| %>
+              <% @course.curatorships.sort_by{|c| c.user.last_name}.each do |curatorship| %>
                 <li class = "list-style-none">
                   <p>
-                    <%= curatorship.user.full_name %> | 
+                    <%= curatorship.user.full_name %> |
                     <%= link_to "Remove", course_curatorship_path(@course, curatorship), method: :delete,
                         data: {confirm: "Are you sure you want to remove this curator?"}, class: "link-no-style action" %>
                   </p>
@@ -28,7 +28,7 @@
           <div class="form">
             <h2>Students for <%= @course.name %></h2>
             <ul>
-              <% @course.enrollments.each do |enrollment| %>
+              <% @course.enrollments.sort_by{|e| e.user.last_name}.each do |enrollment| %>
                 <li class = "list-style-none">
                   <p><%= enrollment.user.full_name %> |
                     <%= link_to "Remove", course_enrollment_path(@course, enrollment), method: :delete,
@@ -39,7 +39,7 @@
             </ul>
             <p>
               <%= link_to "Add a student", new_course_enrollment_path(@course), class: "link-no-style form-btn" %>
-            </p>  
+            </p>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
     <div class="col-md-6">
       <div class="form">
         <h2>Edit Course Details</h2>
-        <%= render 'form', course: @course %>     
+        <%= render 'form', course: @course %>
       </div>
     </div>
   </div>

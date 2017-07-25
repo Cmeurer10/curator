@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:update, :destroy, :upvote]
-  before_action :set_conversation, only: [:index, :create, :update, :destroy, :refresh_part, :upvote]
-  before_action :set_book, only: [:index, :update, :create, :destroy, :refresh_part, :upvote]
+  before_action :set_post, only: [:update, :destroy, :upvote, :flag]
+  before_action :set_conversation, except: [:show, :new]
+  before_action :set_book, except: [:show, :new]
 
   skip_after_action :verify_authorized, only: [:refresh_part]
   after_action :verify_policy_scoped, only: [:refresh_part]
@@ -82,6 +82,16 @@ class PostsController < ApplicationController
         @post = Post.new
         format.js { render :index }
       end
+    end
+  end
+
+  def flag
+    authorize @post
+    @post.flag = !@post.flag
+    respond_to do |format|
+      @post.save
+      @post = Post.new
+      format.js { render :index }
     end
   end
 

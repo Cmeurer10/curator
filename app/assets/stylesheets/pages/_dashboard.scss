@@ -42,10 +42,8 @@ body{
 	width: 368px;
 	// margin-top: 20px;
 	// margin-bottom: 20px;
-	background-size: cover;
-	background-position: center;
-	padding: 10px;
-	display: flex;
+	background-color: white;
+	position: relative;
 	margin: 10px;
 	box-shadow: $card-box-shadow;
 }
@@ -59,8 +57,11 @@ body{
 }
 
 .book-card-pic{
-	height: 200px;
-	width: 100px;
+	height: 100%;
+	width: 40%;
+	background-size: cover;
+	background-position: center;
+	display: inline-block;
 }
 // .course-card-pic{
 // 	padding: 10px;
@@ -91,6 +92,9 @@ body{
 }
 .book-info{
 	margin-left: 30px;
+	display: inline-block;
+	position: absolute;
+	top: 35px;
 }
 .course-header-element {
 	padding: 0 10px;
@@ -105,3 +109,18 @@ body{
 	font-weight: lighter;
 	transition: color 0.3s ease;
 }
+.avatar-stack{
+	margin-right: -10px;
+}
+.fix-top-right{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+.course-nav h3{
+	margin-top: 0px;
+}
+.course-nav>ul>li{
+	padding: 15px 0;
+}
+

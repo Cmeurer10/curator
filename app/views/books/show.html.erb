@@ -241,14 +241,14 @@
 		    }
 
 		    //NOTES:  1:  span.setAttribute "myHighlights"
-		    //        2:  
+		    //        2:
 
 			Curator.getHighlightRange=function()
 			    {
 			    var selection= window.getSelection().getRangeAt(0);
 			    var selectedText = selection.extractContents();
 			    var span= document.createElement("span");
-	
+
 			    span.style.backgroundColor = "white";
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
@@ -292,7 +292,7 @@
 			    //   error: function(data){
 			    //     return false
 			    // }
-			 	
+
 			// }
 
 		 //  function pressed(e)
@@ -322,8 +322,14 @@
 			// Curator.createThread(<%#= :topic %>, indexes.start, indexes.end);
 			// });
 
+			$(".highlight").hover(function(){
+				$(this).css("background-color", "yellow");
+			}, function () {
+				if
+				$(this).css("background-color", "#D7D7D7");
+			});
+
 		$(".highlight").hover(function(){
-	    // $(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
 			var convo_db_id_child = ".parent-convo-" + convo_css_id.slice(6,);
 			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);
@@ -358,8 +364,9 @@
 		});
 
 		$(".highlight").click(function(e){
+			// $(this).css("background-color", "orange");
 			// e.stopPropogation();
-			// $(this).css("background-color", "pink");
+			$(this).css("background-color", "pink");
 			var convo_css_id = $(this).attr('id');
 			var convo_db_id_child = ".parent-convo-" + convo_css_id.slice(6,);
 			var convo_db_id = "#convo-db-" + convo_css_id.slice(6,);
@@ -369,7 +376,7 @@
 			$(".convo-instance").removeClass('active-convo');
 			var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convo_db_id+")").filter(".convo-instance:not("+convo_db_id_child+")");
 			not_hidden_nor_active.slideUp('slow', function() {
-				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").addClass('hidden').filter(".convo-instance:not("+convo_db_id_child+")");
+				not_hidden_nor_active.filter(".convo-instance:not("+convo_db_id+")").filter(".convo-instance:not("+convo_db_id_child+")").addClass('hidden');
 			});
 			$(convo_db_id_child).removeClass('hidden');
 			$(convo_db_id_child).addClass('active-convo');

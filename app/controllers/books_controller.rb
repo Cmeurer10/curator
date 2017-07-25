@@ -14,10 +14,12 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @conversations = @book.conversations
-    authorize @book
+    authorize @book    
 
-  # TODO: Spinner with Jquery?
+    # TODO: Spinner with Jquery?
     @chapter = open("https://storage.googleapis.com/the-curator/#{@book.file.path}").read.gsub(/<style.*<\/style>/, "")
+
+    
   end
 
   # GET /books/new

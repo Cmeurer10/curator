@@ -7,7 +7,7 @@
     	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
     	  <% button_color = colors.sample %>
   	    <%= link_to convo.topic, book_conversation_posts_path(@book, convo),
-            remote: true, class: "btn #{button_color} threads" %>
+            remote: true, class: "btn #{button_color} threads", id: convo.id %>
       </div>
     <% end %>
   </div>

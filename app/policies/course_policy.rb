@@ -4,9 +4,9 @@ class CoursePolicy < ApplicationPolicy
       if admin?
         scope.all
       elsif curator?
-        scope.where(course: user.courses_curated)
+        scope.where(id: user.courses_curated_ids)
       else
-        scope.where(course: user.courses_taken)
+        scope.where(id: user.courses_taken_ids)
       end
     end
   end

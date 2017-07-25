@@ -21,6 +21,7 @@ body{
 .course-card-header h2{
 	margin-top: 5px;
 	margin-bottom: 3px;
+	font-weight: bold;
 }
 
 .books-collapse{
@@ -54,6 +55,7 @@ body{
 }
 .book-card h4{
 	font-size: 27px;
+	font-weight: bold;
 }
 
 .book-card-pic{
@@ -95,6 +97,8 @@ body{
 }
 #course-action-drop:hover{
 	cursor: pointer;
+	display: inline-block;
+	
 }
 .action{
 	color: #999999;

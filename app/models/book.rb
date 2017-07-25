@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :posts, through: :conversations
 
   mount_uploader :file, BookFileUploader
+  mount_uploader :cover, BookCoverUploader
+
 
   validates :title, presence: true
   validates :author, presence: true

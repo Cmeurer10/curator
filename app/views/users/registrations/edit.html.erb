@@ -17,7 +17,7 @@
             <div class="profile-pic-data">
               <h2>Change Profile Picture</h2>
               <div>
-                <%= simple_form_for('/users', user_id: user_id) do |f| %>
+                <%= simple_form_for(current_user, url: '/users') do |f| %>
                   <%= f.file_field :avatar %>
                   <%= f.hidden_field :avatar_cache %>
                   <%= f.submit %>

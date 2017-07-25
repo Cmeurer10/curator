@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
 
-  mount_uploaders :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   has_many :courses_curated, through: :curatorships, source: :course
   has_many :courses_taken, through: :enrollments, source: :course

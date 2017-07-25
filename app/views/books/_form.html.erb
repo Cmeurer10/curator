@@ -18,6 +18,13 @@
   </div>
 
   <div>
+    <%= f.label :cover %>
+    <%= f.file_field :cover %>
+    <%= f.hidden_field :cover_cache %>
+  </div>
+
+  <div>
+    <%= f.label :file %>
     <%= f.file_field :file %>
     <%= f.hidden_field :file_cache %>
   </div>

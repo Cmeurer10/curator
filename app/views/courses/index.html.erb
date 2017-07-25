@@ -36,33 +36,34 @@
             <div class="books-container">
               <% course.books.each do |book| %>
                 <%= link_to book_path(book) do %>
-                  
+
                     <div class="book-card">
                       <div class="book-card-pic" style="background-image:
                                url(<%#= cl_image_path book.cover_photo, :default_image => "math.svg" %>
-                                    <%= image_path("math.svg") %>)";>
+                                   <%= book.cover.url.nil? ? image_path("math.svg") : image_url(book.cover.url) %>)";>
+                                    <!-- <%#= image_path("math.svg") %>)";> -->
                       </div>
                       <div class="book-info">
                         <h4><%= book.title %></h4>
                         <p><%= book.author %></p>
                         <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
                           <div>
-                            <%= link_to 'Edit', edit_course_book_path(course, book), class: "action"  %> | 
+                            <%= link_to 'Edit', edit_course_book_path(course, book), class: "action"  %> |
                             <%= link_to 'Delete', course_book_path(course, book), method: :delete, data: {confirm:
                                 "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %>
                           </div>
                         <% end %>
                       </div>
-                      
-                    </div> 
-                  
+
+                    </div>
+
                 <% end %>
               <% end %>
             </div>
           </div>
         </div>
       </div>
-    </div>  
+    </div>
 
 
 
@@ -98,7 +99,7 @@
             <div class="actions">
                <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
                  <%= link_to "Add a book", new_course_book_path(course) %> |
-                 <%= link_to 'Edit', edit_course_path(course) %> | 
+                 <%= link_to 'Edit', edit_course_path(course) %> |
                  <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm:
                    "Are you sure? All books in this course and their respective discussions will be lost!"} %>
                <% end %>

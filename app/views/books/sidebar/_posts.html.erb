@@ -1,7 +1,11 @@
 <div id='post-container'>
   <% if !@posts.nil? %>
     <% @posts.sort_by(&:votes).reverse.each do |post| %>
+      <% if post.flag %>
+        <div class="post-card" style="background-color: #f4ecbe;">
+      <% else %>
         <div class="post-card">
+      <% end %>
         <div class="poster-info">
           <div class="poster-avatar">
             <% if post.user.facebook_picture_url %>
@@ -22,11 +26,21 @@
           <p><%= post.content %></p>
         </div>
         <div class="post-actions">
+          <!-- Flag post as correct, useful, or important -->
+          <% if ['admin', 'curator'].include?(current_user.role) || current_user == post.user %>
+            <%= link_to(book_conversation_post_flag_path(@book, @conversation, post), remote: true) do %>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+
+          <!-- Upvote post -->
           <%= post.votes.to_i %>
           <%= link_to(book_conversation_post_upvote_path(@book, @conversation, post), remote: true) do %>
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
           <% end %>
-          <% if current_user.role == 2 || current_user.role == 1 || current_user == post.user %>
+
+          <!-- Edit or delete post -->
+          <% if ['admin', 'curator'].include?(current_user.role) || current_user == post.user %>
              <%= link_to "Edit", book_conversation_posts_path(@book, @conversation, post_id: post.id) , remote: true %> |
              <%= link_to 'Delete', book_conversation_post_path(@book, @conversation, post),
               method: :delete, remote: true, data: {confirm: "Are you sure you want to delete this post?"} %>

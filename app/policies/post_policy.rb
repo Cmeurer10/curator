@@ -36,6 +36,10 @@ class PostPolicy < ApplicationPolicy
     scope
   end
 
+  def flag?
+    curator_or_admin?
+  end
+
   def edit?
     update?
   end

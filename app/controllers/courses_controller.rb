@@ -5,6 +5,12 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = policy_scope(Course)
+    @books = []
+    @courses.each do |course|
+      course.books.each do |book|
+        @books << book
+      end
+    end
   end
 
   # GET /courses/1

@@ -8,6 +8,9 @@
               <% if current_user.facebook_picture_url %>
                 <% avatar_url = current_user.facebook_picture_url %>
                 <%= image_tag avatar_url, class: "avatar-xl" %>
+              <% elsif current_user.avatar.url.present? %>
+                <% avatar_url = current_user.avatar.url %>
+                <%= image_tag avatar_url, class: "avatar-xl" %>
               <% else %>
                 <div class="default-avatar-xl background-default">
                   <p><%= current_user.first_name[0].capitalize %></p>

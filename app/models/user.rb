@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
 
+  after_create: :send_welcome_email
+
   mount_uploader :avatar, AvatarUploader
 
   has_many :courses_curated, through: :curatorships, source: :course
@@ -50,5 +52,11 @@ class User < ApplicationRecord
     end
 
     return user
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
   end
 end

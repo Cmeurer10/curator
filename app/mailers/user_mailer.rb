@@ -5,10 +5,12 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
   #
-  def welcome
-    @greeting = "Hi"
+  def welcome(user)
+    @user = user
+    @greeting = "Hello"
 
     mail to: "to@example.org"
+    # mail(to: @user.email, subject: "Welcome to Curator")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

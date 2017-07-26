@@ -70,30 +70,25 @@
 	margin-bottom: 0px;
 }
 .post-card{
-	margin-bottom: 35px;
+	margin-top: 35px;
 	position: relative;
 	padding: 10px;
 }
+
 #newConvo{
 	background-color: $blue;
-	border-radius: 50%;
 	box-shadow: $button-box-shadow;
-	height: 50px;
-	width: 50px;
-	position: fixed;
-	bottom: 10px;
-	left: 10px;
+	border: 2px solid black;
+	border-radius: 10px;
+	text-align: center;
+	margin-left: 2%;
+	width: 95%;
 }
 
 #newConvo:hover{
 	cursor: pointer;
 }
-.newConvoImage{
-	width: 35px;
-	position: absolute;
-	top: 5px;
-	left:7px;
-}
+
 #convoClose{
 	text-align: left;
 }
@@ -103,19 +98,19 @@
 .post-setting{
 	top:0px;
 }
-.post-menu-right li > a {
+.post-dropdown-menu-right li > a {
   transition: color 0.3s ease;
   font-weight: lighter !important;
-  color: #999999 !important;
+  color: black !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 5px 13px;
 }
-.post-menu-right li > a:hover {
+.post-dropdown-menu-right li > a:hover {
   background: transparent !important;
   color: black !important;
 }
-.post-menu-right:before {
+.post-dropdown-menu-right:before {
   content: ' ';
   height: 10px;
   width: 10px;
@@ -131,4 +126,15 @@
 	position: absolute;
 	top: 5px;
 	left: 5px;
+}
+.upvote-link{
+	transition: color 0.3s ease;
+	font-style: italic;
+	color: $gray;
+}
+.upvote-link:hover{
+	color: black;
+}
+.posts-form{
+	margin-top: 35px;
 }

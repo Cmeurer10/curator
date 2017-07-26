@@ -1,12 +1,14 @@
-<%= simple_form_for([@book, @conversation, @post], remote: true) do |f| %>
-  <%= f.error_notification %>
+<div class="posts-form">
+	<%= simple_form_for([@book, @conversation, @post], remote: true) do |f| %>
+	  <%= f.error_notification %>
 
-  <div class="form-inputs">
-  	<%= f.label "Comment" %>
-    <%= f.input :content, as: :text, label: false %>
-  </div>
+	  <div class="form-inputs">
+	  	<%= f.label "Comment" %>
+	    <%= f.input :content, as: :text, label: false %>
+	  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, value: "#{@post.persisted? ? 'Update' : 'Post'} comment", id: 'new-post-btn' %>
-  </div>
-<% end %>
+	  <div class="form-actions">
+	    <%= f.button :submit, value: "#{@post.persisted? ? 'Update' : 'Post'} comment", id: 'new-post-btn' %>
+	  </div>
+	<% end %>
+</div>

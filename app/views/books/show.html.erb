@@ -23,9 +23,9 @@
 					</div>
 				</div>
 				<div class="posts-container hidden">
-					<div class="title">
+<!-- 					<div class="title">
 						<h2 id="post-clickable"></h2>
-					</div>
+					</div> -->
 					<div id="posts">
 					<!-- Content goes here from Posts -->
 
@@ -195,14 +195,17 @@
 			}
 
  	    $("a.threads").click(function(){
+
  	    	var topic = $(this).text();
  	    	var convo = $(this).attr('id');
 	        // $('#conversation-container').slideUp("slow");
 	        $(".posts-container").removeClass('hidden');
 	        // $("#post-clickable").text(topic);
-	        // setTimeout(function() {
-	        // 	postRefresh(convo)
-	        // }, 5000);
+	        runningConvoID = convo;
+	        setTimeout(function() {
+	        	postRefresh(convo)
+	        }, 5000);
+	        // running = true;
 
 		});
 		$('#conversations-clickable').click(function() {
@@ -379,6 +382,7 @@
 			return {convo_css_id: a, convo_db_id_child: b, convo_db_id: c }
 		}
 			$(".hightlighted").off();
+
 			$(".hightlighted").hover(
 					function() {
 						convoElements = getConvoElements(this);
@@ -417,16 +421,20 @@
 
 		}	
   
-
+	// var running = false;
+	var runningConvoID = false;
 	var timeOut = null;
 		function postRefresh(convo) {{
+			if (runningConvoID != convo) {
+				return false;
+			}
 		  $.ajax({
 		    type: "GET",
 		    url: "/books/<%= @book.id %>/conversations/" + convo + "/posts/refresh_part",
 		    success:function(data) {
 		         	        timeOut = setTimeout(function() {
 					        	postRefresh(convo)
-					        }, 3000);
+					        }, 5000);
 		         	        // timeOut = setTimeout(postRefresh(convo), 1000);
 			        return false
 			    }

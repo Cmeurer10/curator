@@ -1,11 +1,10 @@
 <div class="row">
-    <div class="col-xs-3">
-      <div class="course-nav form">
-      <!-- TODO:  Check me for securtiy -->
-        <% if current_user.courses_curated.empty? && current_user.role == 'curator' %>
-          <h3>No Courses yet</h3>
-          <%= link_to "Start a New Course", new_course_path, class: "link-no-style" %>
-      <!-- ################################ -->
+  <div class="col-xs-3">
+    <div class="course-nav form">
+    <!-- TODO:  Check me for securtiy -->
+      <% if current_user.courses_curated.empty? && current_user.role == 'curator' %>
+        <h3>No Courses yet</h3>
+        <%= link_to "Start a New Course", new_course_path, class: "link-no-style" %>
         <% else %>
           <h3 class="border-bottom">Courses:</h3>
             <div class="course-list">
@@ -73,29 +72,28 @@
                         <li><%= link_to 'Edit', edit_course_book_path(book.course, book), class: "action"  %> </li>
                         <li><%= link_to 'Delete', course_book_path(book.course, book), method: :delete, data: {confirm:
                             "Are you sure? All discussions in this book will be lost! Future users could no longer learn from this information!"}, class: "action" %></li>
-                      </ul>
-                    </div>
-                    
-                <% end %>
-                  <%= link_to book_path(book) do %>
-                      <div class="book-card-pic" style="background-image:
-                               url(<%#= cl_image_path book.cover_photo, :default_image => "math.svg" %>
-                                   <%= book.cover.url.nil? ? image_path("math.svg") : image_url(book.cover.url) %>)";>
-                                    <!-- <%#= image_path("math.svg") %>)";> -->
-                      </div>
-                      <div class="book-info">
-                        <h4><%= book.title %></h4>
-                        <p><%= book.author %></p>
-                      </div>
-                    </div>
-                  <% end %>
-                <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <%= link_to book_path(book) do %>
+                <div class="book-card-pic" style="background-image:
+                            url(<%#= cl_image_path book.cover_photo, :default_image => "math.svg" %>
+                  <%= book.cover.url.nil? ? image_path("math.svg") : image_url(book.cover.url) %>)";>
+                    <!-- <%#= image_path("math.svg") %>)";> -->
+                </div>
+                <div class="book-info">
+                  <h4><%= book.title %></h4>
+                  <p><%= book.author %></p>
+                </div>
               </div>
-            </div>
+            <% end %>
+          <% end %>
         </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <% content_for :javascript do %>
- 
+
 <% end %>

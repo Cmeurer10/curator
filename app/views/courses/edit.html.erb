@@ -28,7 +28,7 @@
           <div class="form">
             <h2>Students for <%= @course.name %></h2>
             <ul>
-              <% @course.enrollments.sort_by{|e| e.user.last_name}.each do |enrollment| %>
+              <% @course.enrollments.reject{|e| e.user.invite_not_accepted?}.sort_by{|e| e.user.last_name}.each do |enrollment| %>
                 <li class = "list-style-none">
                   <p><%= enrollment.user.full_name %> |
                     <%= link_to "Remove", course_enrollment_path(@course, enrollment), method: :delete,
@@ -38,7 +38,7 @@
               <% end %>
             </ul>
             <p>
-              <%= link_to "Add a student", new_course_enrollment_path(@course), class: "link-no-style form-btn" %>
+              <%= link_to "Add a student", course_invite_path(@course), class: "link-no-style form-btn" %>
             </p>
           </div>
         </div>

@@ -13,7 +13,7 @@ class EnrollmentsController < ApplicationController
     @users = User.all.reject { |u| u.courses_taken.include?(@course) }
   end
 
-  def create
+  def create  
     @enrollment = Enrollment.new(enrollment_params)
     @enrollment.course = @course
     @enrollment.user.role = 'student'
@@ -38,6 +38,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def enrollment_params
-    params.require(:enrollment).permit(:user_id)
+    params.require(:enrollment).permit(:user)
   end
 end

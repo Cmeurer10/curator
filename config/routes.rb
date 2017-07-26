@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       resources :books, except: [:show]
       resources :enrollments, except: [:show]
       resources :curatorships, except: [:show]
+      get '/invite', to: 'users#new'
+      post '/invite', to: 'users#invite'
     end
   end
 

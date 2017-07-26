@@ -124,10 +124,19 @@ body{
 	padding: 15px 0;
 }
 .course-nav{
-	padding: 20px 5px;
+	padding: 20px 20px;
 	margin-left: 20px;
 }
 
 .books-container{
 	margin-top: 15px;
+}
+.course-nav-card{
+	padding: 15px;
+	position: relative;
+}
+.course-nav-drop{
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }

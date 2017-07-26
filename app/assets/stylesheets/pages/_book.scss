@@ -77,24 +77,18 @@
 
 #newConvo{
 	background-color: $blue;
-	border-radius: 50%;
 	box-shadow: $button-box-shadow;
-	height: 50px;
-	width: 50px;
-	position: fixed;
-	bottom: 10px;
-	left: 10px;
+	border: 2px solid black;
+	border-radius: 10px;
+	text-align: center;
+	margin-left: 2%;
+	width: 95%;
 }
 
 #newConvo:hover{
 	cursor: pointer;
 }
-.newConvoImage{
-	width: 35px;
-	position: absolute;
-	top: 5px;
-	left:7px;
-}
+
 #convoClose{
 	text-align: left;
 }

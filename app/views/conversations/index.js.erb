@@ -5,7 +5,7 @@ highlightConvo();
 
 	function highlightConvo(){
 
-			selectAndHighlightRange("text", <%= @conversation.start_index %>, <%= @conversation.end_index %>)
+			selectAndHighlightRange("text", <%= @conversation.start_index %>, <%= @conversation.end_index %>, <%= @conversation.id.to_s %>)
 
 	}
 
@@ -56,42 +56,52 @@ highlightConvo();
 	    }
 	}
 
-	function makeEditableAndHighlight(colour) {
-	    sel = window.getSelection();
-	    if (sel.rangeCount && sel.getRangeAt) {
-	        range = sel.getRangeAt(0);
-	    }
-	    document.designMode = "on";
-	    if (range) {
-	        sel.removeAllRanges();
-	        sel.addRange(range);
-	    }
-	    // Use HiliteColor since some browsers apply BackColor to the whole block
-	    if (!document.execCommand("HiliteColor", false, colour)) {
-	        document.execCommand("BackColor", false, colour);
-	    }
-	    document.designMode = "off";
-	}
+		function makeEditableAndHighlight(colour, convo_id) {
+		    sel = window.getSelection();
+		    if (sel.rangeCount && sel.getRangeAt) {
+		        range = sel.getRangeAt(0);
+		    }
+		    document.designMode = "on";
+		    if (range) {
+		        sel.removeAllRanges();
+		        sel.addRange(range);
+		    }
+		    // Use HiliteColor since some browsers apply BackColor to the whole block
+		    if (!document.execCommand("HiliteColor", false, colour)) {
+		        document.execCommand("BackColor", false, colour);
+		    }
+				var listId = window.getSelection().focusNode.parentNode;
+				$(listId).addClass("highlight");
+				$(listId).attr('id', "convo-" + convo_id);
+		    document.designMode = "off";
+		}
 
-	function highlight(colour) {
-	    var range, sel;
-	    if (window.getSelection) {
-	        // IE9 and non-IE
-	        try {
-	            if (!document.execCommand("BackColor", false, colour)) {
-	                makeEditableAndHighlight(colour);
-	            }
-	        } catch (ex) {
-	            makeEditableAndHighlight(colour)
-	        }
-	    } else if (document.selection && document.selection.createRange) {
-	        // IE <= 8 case
-	        range = document.selection.createRange();
-	        range.execCommand("BackColor", false, colour);
-	    }
-	}
 
-	function selectAndHighlightRange(id, start, end) {
-	    setSelectionRange(document.getElementById("text"), start, end);
-	    highlight("<%= current_user.highlight_color %>");
-	}
+	function highlight(colour, convo_id) {
+		    var range, sel;
+		    if (window.getSelection) {
+		        // IE9 and non-IE
+		        try {
+		            if (!document.execCommand("BackColor", false, colour)) {
+		                makeEditableAndHighlight(colour, convo_id);
+		            }
+
+		        } catch (ex) {
+		            makeEditableAndHighlight(colour, convo_id)
+		        }
+		    } else if (document.selection && document.selection.createRange) {
+		        // IE <= 8 case
+		        range = document.selection.createRange();
+		        range.execCommand("BackColor", false, colour);
+		    }
+		}
+
+		function selectAndHighlightRange(id, start, end, convo_id) {
+			    setSelectionRange(document.getElementById("text"), start, end);
+			    highlight("<%= current_user.highlight_color %>", convo_id);
+
+			}
+	// function selectAndHighlightRange(id, start, end) {
+	//     setSelectionRange(document.getElementById("text"), start, end);
+	//     highlight("<%= current_user.highlight_color %>");
+	// }

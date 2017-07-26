@@ -7,6 +7,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, value: 'Post comment', id: 'new-post-btn' %>
+    <%= f.button :submit, value: "#{@post.persisted? ? 'Update' : 'Post'} comment", id: 'new-post-btn' %>
   </div>
 <% end %>

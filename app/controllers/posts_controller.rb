@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:update, :destroy]
-  before_action :set_conversation, only: [:index, :create, :destroy, :refresh_part]
-  before_action :set_book, only: [:index, :create, :destroy, :refresh_part]
+  before_action :set_post, only: [:update, :destroy, :upvote, :flag]
+  before_action :set_conversation, except: [:show, :new]
+  before_action :set_book, except: [:show, :new]
 
   skip_after_action :verify_authorized, only: [:refresh_part]
   after_action :verify_policy_scoped, only: [:refresh_part]
 
   def index
     @posts = policy_scope(Post).where(conversation: @conversation)
-    @post = Post.new
+    @post = params[:post_id].nil? ? Post.new : Post.find(params[:post_id])
     respond_to do |format|
       # format.html
       format.js
@@ -46,14 +46,11 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize @post
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+      @post.update(post_params)
+      @post = Post.new
+      format.js { render :index }
     end
   end
 
@@ -68,18 +65,40 @@ class PostsController < ApplicationController
       end
     end
   end
+
   def refresh_part
-  # get whatever data you need to a variable named @data
-   @posts = policy_scope(Post).where(conversation: @conversation)
-  respond_to do |format|
-    format.js
+    # get whatever data you need to a variable named @data
+    @posts = policy_scope(Post).where(conversation: @conversation)
+    respond_to do |format|
+      format.js
+    end
   end
-end
+
+  def upvote
+    authorize @post
+    respond_to do |format|
+      @post.votes += 1
+      if @post.save!
+        @post = Post.new
+        format.js { render :index }
+      end
+    end
+  end
+
+  def flag
+    authorize @post
+    @post.flag = !@post.flag
+    respond_to do |format|
+      @post.save
+      @post = Post.new
+      format.js { render :index }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find(params[:post_id].nil? ? params[:id] : params[:post_id])
     end
 
     def set_conversation

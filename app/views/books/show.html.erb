@@ -1,5 +1,7 @@
+
  
-<%= render "/books/platform-nav" %>
+<%#= render "/books/platform-nav" %>
+
 <div class="platform">
 	<div class="row">
 		<div class="col-md-8">
@@ -14,7 +16,6 @@
 			<div class="conversation" id='sidebar'>
 				<div class="threads-container">
 					<div class="title">
-						<i class="fa fa-minus inline" aria-hidden="true" id="convo-glyph"></i>
 						<h2 id ="conversations-clickable">Highlights</h2>
 					</div>
 					<div id="conversations">
@@ -23,7 +24,6 @@
 				</div>
 				<div class="posts-container hidden">
 					<div class="title">
-						<i class="fa fa-minus inline" aria-hidden="true" id="post-glyph"></i>
 						<h2 id="post-clickable"></h2>
 					</div>
 					<div id="posts">
@@ -31,7 +31,7 @@
 
 					</div>
 					<div id="post-comment">
-					  
+
 					</div>
 				</div>
 			</div>
@@ -56,17 +56,17 @@
 </div>
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id='new-convo-modal-on-existing'>		 +
-  <div class="modal-dialog modal-md" role="document">		
-    <div class="modal-content">		
-      <div class="modal-header">		
- 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>		
- 	<h4 class="modal-title" id="myModalLabelOnExisting">Start a Conversation</h4>		
-      </div>		
-      <div class="modal-body">		
-        <%= render "/conversations/child_form" %>		
-      </div>		
-    </div>		
-  </div>		
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+ 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+ 	<h4 class="modal-title" id="myModalLabelOnExisting">Start a Conversation</h4>
+      </div>
+      <div class="modal-body">
+        <%= render "/conversations/child_form" %>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -79,16 +79,20 @@
 
      $('#submit').click(function(e) {
     	// e.preventDefault();
-    	// Coding
     	$('#new-convo-modal').modal('toggle'); //or  $('#IDModal').modal('hide');
+    	$('#conversation').load("/books/refreshConvos")
+    	
     	// return false;
 	});
-     	
-     	
+      $('#new-convo-submit').click(function(e) {
+    	// e.preventDefault();
+    	// Coding
+    	$('#new-convo-modal-on-existing').modal('toggle'); //or  $('#IDModal').modal('hide');
+    	// return false;
+	});
 
-     	function changeHighlighterColor(color){
 
-     	}
+
 
      	highlightExistingConvos();
 			function highlightExistingConvos(){
@@ -193,16 +197,12 @@
  	    $("a.threads").click(function(){
  	    	var topic = $(this).text();
  	    	var convo = $(this).attr('id');
-	        $('#conversation-container').slideUp("slow");
-	        $("#convo-glyph").removeClass('fa fa-minus inline');
-	        $("#convo-glyph").addClass('fa fa-plus inline');
+	        // $('#conversation-container').slideUp("slow");
 	        $(".posts-container").removeClass('hidden');
-	        $("#post-clickable").text(topic);
-	        // refresh(convo);
-	        setTimeout(function() {
-	        	postRefresh(convo)
-	        }, 1000);
-	        // setInterval(refresh, 1000);
+	        // $("#post-clickable").text(topic);
+	        // setTimeout(function() {
+	        // 	postRefresh(convo)
+	        // }, 5000);
 
 		});
 		$('#conversations-clickable').click(function() {
@@ -237,9 +237,6 @@
 			         $('#post-glyph').toggleClass('fa fa-minus');
 			    }
 		});
-		$('#hl-blue').click(function(event) {
-			$('.hightlighted').addClass('hl-blue');
-			});
 
 		// });
 			// if(Curator === undefined){
@@ -247,7 +244,10 @@
 		     // }
 		$("#newConvo").click(function(event) {
 			/* Act on the event */
+
 			Curator.getHighlightRange();
+			addHighlightEventListener();
+
 		});
 		 // $(document).bind('keypress',pressed);
 		    var userSelection;
@@ -271,7 +271,7 @@
 			    span.appendChild(selectedText);
 			    selection.insertNode(span);
 			    span.setAttribute("class", "hightlighted");
-
+			    
 			    var start = ($('#text').text().search(selection));
 			    start = parseInt(start);
 			    var end = selection.toString().length + start;
@@ -281,58 +281,9 @@
 			    	indexes.end = end;
 			    $('#conversation_start_index').val(start);
 			    $('#conversation_end_index').val(end);
+			    
 
 			    }
-			// Curator.highlightRange=function(){
-			// 	var selection= window.getSelection().getRangeAt(0);
-			//     var selectedText = selection.extractContents();
-			//     var span= document.createElement("span");
-			//     span.style.backgroundColor = "yellow";
-			//     span.appendChild(selectedText);
-			//     selection.insertNode(span);
-			// }
-
-			// Curator.createThread=function(topic, start_index, end_index){
-				// jQuery.ajax({
-			 //      type: "POST",
-			 //      url: "/books/<%= @book.id %>/conversations",
-			 //      data: {  conversation: { topic: topic, start_index: start_index, end_index: end_index, user_id: "<%= current_user.id %>", book_id: "<%= @book.id %>" }},
-			    // //   success:function(data) {
-			    //     alert(data.id)
-			    //     return false
-			    // }
-			    //   error: function(data){
-			    //     return false
-			    // }
-
-			// }
-
-		 //  function pressed(e)
-		 //    {
-			//     if(e.keyCode === 13)
-			//     {
-			//     	Curator.getHighlightRange();
-			//     	$("#newConvo").click();
-			//     }
-			// }
-
-
-		//
-		// function refreshPosts() {
-		//   $.ajax({
-		//
-		//   });
-		// }
-		//
-	  // $('#new-post-btn').click(function() {
-	  //   refreshPosts();
-	  // });
-	  // 		$('#submit').on('click', function(event) {
-			// event.preventDefault();
-			// /* Act on the event */
-			// var indexes = Curator.hightlight();
-			// Curator.createThread(<%#= :topic %>, indexes.start, indexes.end);
-			// });
 
 
 		function slide_show(ele) {
@@ -394,6 +345,10 @@
 		});
 
 
+		
+
+
+
 		$('#new-convo-on-existing').click(function(){
 			var parent_index = $('.active-convo').attr('id').slice(9,);
 			$('#conversation_parent_id').val(parent_index);
@@ -402,10 +357,69 @@
 
 	});
 
-	var timeOut = null;
+		function addHighlightEventListener(){
+		  function slide_show(ele) {
+			var show = $(ele).hasClass('hidden');
+			if (show) {
+				$(ele).hide();
+				$(ele).removeClass('hidden');
+				$(ele).slideDown(400);
+			} else {
+				$(ele).slideUp(400, function() {
+					$(ele).addClass('hidden');
+					$(ele).show();
+				});
+			};
+		};
 
+		function getConvoElements(ele) {
+			var a = $(ele).attr('id');
+			var b = ".parent-convo-" + a.slice(6,);
+			var c = "#convo-db-" + a.slice(6,);
+			return {convo_css_id: a, convo_db_id_child: b, convo_db_id: c }
+		}
+			$(".hightlighted").off();
+			$(".hightlighted").hover(
+					function() {
+						convoElements = getConvoElements(this);
+						if (!$(convoElements['convo_db_id']).hasClass('active-convo')){
+							$(this).css("background-color", "yellow");
+							slide_show(convoElements['convo_db_id_child']);
+							slide_show(convoElements['convo_db_id']);
+						}
+					}, function() {
+						convoElements = getConvoElements(this);
+						if (!$(convoElements['convo_db_id']).hasClass('active-convo')){
+							slide_show(convoElements['convo_db_id_child']);
+							slide_show(convoElements['convo_db_id']);
+							$(this).css("background-color", "#D7D7D7");
+						}
+					}
+				);
+
+				$(".hightlighted").click(function(e){
+					$(".hightlighted").css("background-color", "#D7D7D7");
+					$(this).css("background-color", "pink");
+					$(".convo-instance").removeClass('active-convo');
+					var not_hidden_nor_active = $(".convo-instance:not(.hidden)").filter(".convo-instance:not("+convoElements['convo_db_id']+")").filter(".convo-instance:not("+convoElements['convo_db_id_child']+")");
+					not_hidden_nor_active.slideUp('slow', function() {
+						not_hidden_nor_active.filter(".convo-instance:not("+convoElements['convo_db_id']+")").filter(".convo-instance:not("+convoElements['convo_db_id_child']+")").addClass('hidden');
+					});
+
+					$(convoElements['convo_db_id_child']).removeClass('hidden');
+					$(convoElements['convo_db_id_child']).addClass('active-convo');
+					$(convoElements['convo_db_id']).removeClass('hidden');
+					$(convoElements['convo_db_id']).addClass('active-convo');
+					if (!$('#conversation-container').is(':visible')) {;
+						$('#conversation-container').slideToggle("slow");
+					}
+				});
+
+		}	
+  
+
+	var timeOut = null;
 		function postRefresh(convo) {{
-		   
 		  $.ajax({
 		    type: "GET",
 		    url: "/books/<%= @book.id %>/conversations/" + convo + "/posts/refresh_part",
@@ -417,9 +431,15 @@
 			        return false
 			    }
 		  });
-		  };
+		}}
 
-		  };
+		  function convoRefresh() {{
+
+		  $.ajax({
+		    type: "GET",
+		    url: "/books/<%= @book.id %>/conversations/"
+		  	});
+		  };}
 
 
 
@@ -428,5 +448,3 @@
   </script>
 
 <% end %>
-
-

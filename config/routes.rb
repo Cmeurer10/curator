@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users,
-    controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+    controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: "users/registrations" }
+  #   devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
+
 
   scope '/dashboard' do
     resources :courses, except: [:show] do
@@ -13,6 +18,8 @@ Rails.application.routes.draw do
   resources :books, only: [:show] do
     resources :conversations, only: [:update, :destroy, :create] do
       resources :posts, only: [:index, :update, :destroy, :create] do
+        get '/upvote', to: 'posts#upvote'
+        get '/flag', to: 'posts#flag'
         get '/refresh_part', to: 'posts#refresh_part', on: :collection
       end
     end

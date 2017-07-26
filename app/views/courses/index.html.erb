@@ -36,7 +36,10 @@
                              <% if curator.facebook_picture_url %>
                               <% avatar_url = curator.facebook_picture_url %>
                               <%= image_tag avatar_url, class: "avatar-large avatar-stack", "data-toogle" => "tooltip", "title" => curator.full_name %>
-                            <% else %>
+                             <% elsif curator.avatar.url %>
+                               <% avatar_url = curator.avatar %>
+                               <%= image_tag avatar_url, class: "avatar-large avatar-stack", "data-toogle" => "tooltip", "title" => curator.full_name %>
+                             <% else %>
                               <div class="default-avatar background-default avatar-stack"  data-toggle="tooltip" title= <%= curator.full_name %>>
                                 <p><%= curator.first_name[0].capitalize %></p>
                               </div>

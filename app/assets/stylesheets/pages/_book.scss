@@ -78,11 +78,18 @@
 #newConvo{
 	background-color: $blue;
 	box-shadow: $button-box-shadow;
-	border: 2px solid black;
-	border-radius: 10px;
-	text-align: center;
-	margin-left: 2%;
-	width: 95%;
+	// border: 2px solid black;
+	// border-radius: 10px;
+	// text-align: center;
+	// margin-left: 2%;
+	// width: 95%;
+	position: fixed;
+	bottom: 25px;
+	left: 25px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+
 }
 
 #newConvo:hover{
@@ -137,4 +144,10 @@
 }
 .posts-form{
 	margin-top: 35px;
+}
+.newConvoImage{
+	width: 72%;
+	position: absolute;
+	top: 10px;
+	left: 13px;
 }

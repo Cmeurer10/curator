@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     enrollment.course = @course
     enrollment.user = user
     enrollment.save
-    redirect_to edit_course_path
+    redirect_to edit_course_path(@course)
   end
 
   private

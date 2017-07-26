@@ -57,7 +57,7 @@
               <div class="books-container">
                 <% @books.each do |book| %>
                   <div class="book-card">
-                    <% if current_user.role == 'admin' || course.curators.include?(current_user) %>
+                    <% if current_user.role == 'admin' || book.course.curators.include?(current_user) %>
                     <div class="dropdown">
                       <div class="dropdown-toggle course-header-element inline fix-top-right" id="book-action-drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                       <i class="fa fa-cog icon-gray " aria-hidden="true"></i></div>

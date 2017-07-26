@@ -23,7 +23,7 @@
                 <%= simple_form_for(current_user, url: '/users') do |f| %>
                   <%= f.file_field :avatar %>
                   <%= f.hidden_field :avatar_cache %>
-                  <%= f.submit %>
+                  <%= f.submit "Change Avatar", class: "btn btn-default form-margin-top" %>
                 <% end %>
              </div>
             </div>

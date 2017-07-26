@@ -8,11 +8,11 @@
 	  </div>
 
 	  <div class="form-actions">
-	    <%= f.button :submit, value: "#{@post.persisted? ? 'Update' : 'Post'} comment", id: 'new-post-btn' %>
-	  </div>
+	    <%= f.button :submit, value: "#{@post.persisted? ? 'Update' : 'Post'} comment", id: 'new-post-btn', class: "inline" %>
 	<% end %>
 	  <% if @conversation.user == current_user || ['admin', 'curator'].include?(current_user.role) %>
-    <%= link_to "Delete this thread", book_conversation_path(@book, @conversation), method: :delete,
+    <%= link_to "Delete this thread", book_conversation_path(@book, @conversation), class: "btn btn-default inline pull-right", method: :delete,
         data: {confirm: "Are you sure you want to delete this thread? Other users could no longer learn from it!" } %>
+	  </div>
   <% end %>
 </div>

@@ -17,14 +17,14 @@
     <%= f.input :isbn %>
   </div>
 
-  <div>
-    <%= f.label :cover %>
+  <div class="form-margin-top">
+    <%= f.label "Select Cover Image" %>
     <%= f.file_field :cover %>
     <%= f.hidden_field :cover_cache %>
   </div>
 
-  <div>
-    <%= f.label :file %>
+  <div class="form-margin-top">
+    <%= f.label "Upload the Text" %>
     <%= f.file_field :file %>
     <%= f.hidden_field :file_cache %>
   </div>

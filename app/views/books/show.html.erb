@@ -94,6 +94,8 @@
     	// return false;
 	});
 
+      
+
 
 
 
@@ -203,6 +205,8 @@
  	    	var convo = $(this).attr('id');
 	        // $('#conversation-container').slideUp("slow");
 	        $(".posts-container").removeClass('hidden');
+	        $("a.threads").removeClass('button-gray');
+	        $('.threads').not(this).addClass('button-gray');
 	        // $("#post-clickable").text(topic);
 	        runningConvoID = convo;
 	        setTimeout(function() {

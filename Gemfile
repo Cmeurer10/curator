@@ -33,6 +33,10 @@ gem 'pundit'
 # PDF to HTML
 gem 'pdf-reader'
 
+# allows testing of mailers without sending true emails
+gem "letter_opener", group: :development
+
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

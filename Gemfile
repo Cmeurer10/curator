@@ -33,6 +33,9 @@ gem 'pundit'
 # PDF to HTML
 gem 'pdf-reader'
 
+# Allows users to invite other users
+gem 'devise_invitable', '~> 1.7.0'
+
 # allows testing of mailers without sending true emails
 gem "letter_opener", group: :development
 

@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     # For additional in app/views/devise/registrations/edit.html.erb
     devise_parameter_sanitizer.permit(:account_update, keys: [:avatar, :avatar_cache])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name])
   end
 
   # Uncomment when you *really understand* Pundit!

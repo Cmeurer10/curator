@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, omniauth_providers: [:facebook]
+  devise :invitable, :omniauthable, omniauth_providers: [:facebook]
 
-  after_create: :send_welcome_email
+  after_invitation_accepted :send_welcome_email
 
   mount_uploader :avatar, AvatarUploader
 
@@ -24,9 +24,9 @@ class User < ApplicationRecord
   # validates_format_of :username, with: /[A-z\d]*/
   validates :email, presence: true, uniqueness: true
   validates_format_of :email, with: Devise::email_regexp
-  # validates :first_name, presence: true
+  validates :first_name, presence: true
   validates_format_of :first_name, with: /[A-z\s]*/
-  # validates :last_name, presence: true
+  validates :last_name, presence: true
   validates_format_of :last_name, with: /[A-z\s]*/
 
   def full_name
@@ -54,9 +54,13 @@ class User < ApplicationRecord
     return user
   end
 
+  def invite_not_accepted?
+    created_by_invite? && invitation_not_accepted?
+  end
+
   private
 
   def send_welcome_email
-    UserMailer.welcome(self).deliver_now
+    UserMailer.welcome(self).deliver_now unless self.enrollments.count > 1
   end
 end

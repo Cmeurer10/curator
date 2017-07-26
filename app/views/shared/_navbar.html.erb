@@ -19,6 +19,10 @@
           <% if current_user.facebook_picture_url %>
             <% avatar_url = current_user.facebook_picture_url %>
             <%= image_tag avatar_url, class: "avatar-large dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% elsif current_user.avatar  %>
+          <% avatar_url = current_user.avatar%>
+            <%= image_tag avatar_url, class: "avatar-large dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          
           <% else %>
             <div class="default-avatar dropdown-toggle background-default" id="navbar-wagon-menu" data-toggle="dropdown">
               <!-- <p><%#= image_tag(current_user.avatar.url) %></p> -->

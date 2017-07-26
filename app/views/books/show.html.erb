@@ -7,16 +7,16 @@
 		<div class="col-md-8">
 			<div class="book-content" id= "text" spellcheck="false">
 				<%=  @chapter.html_safe%>
-				<!-- <div id="newConvo" data-toggle="modal" data-target="#new-convo-modal">
-					<%#= image_tag "highlighter", class: "newConvoImage" %>
-				</div> -->
+				<div id="newConvo" data-toggle="modal" data-target="#new-convo-modal">
+					<%= image_tag "highlighter", class: "newConvoImage" %>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-4" >
 			<div class="conversation" id='sidebar'>
-				<div id="newConvo" data-toggle="modal" data-target="#new-convo-modal">
+				<!-- <div id="newConvo" data-toggle="modal" data-target="#new-convo-modal">
 					<h4>Highlight</h4>
-				</div>
+				</div> -->
 				<div class="threads-container">
 					<div class="title">
 						<h2 id ="conversations-clickable">Conversations</h2>

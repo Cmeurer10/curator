@@ -55,7 +55,7 @@ class User < ApplicationRecord
   end
 
   def invite_not_accepted?
-    created_by_invite? && invitation_not_accepted?
+    created_by_invite? && !invitation_accepted?
   end
 
   private

@@ -77,7 +77,7 @@ class PostsController < ApplicationController
   def upvote
     authorize @post
     respond_to do |format|
-      unless @post.upvoters.include?(current_user.id)
+      unless @post.upvoters.include?(current_user.id.to_s)
         @post.upvoters.push(current_user.id)
         @post.votes += 1
         if @post.save!

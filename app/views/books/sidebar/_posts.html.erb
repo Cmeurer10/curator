@@ -61,9 +61,7 @@ method: :delete, remote: true, data: {confirm: "Are you sure you want to delete 
           <%# end %>
 
           <!-- Upvote post -->
-          <% if post.upvoters.include?(current_user.id) %>
-            <p>You found this helpful</p>
-          <% else %>
+          <% unless post.upvoters.include?(current_user.id.to_s) %>
             <%= link_to(book_conversation_post_upvote_path(@book, @conversation, post),  class: "link-no-style",  remote: true) do %>
               <p class="upvote-link">Was this helpful?</p>
             <% end %>

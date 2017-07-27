@@ -8,7 +8,7 @@
               <% if current_user.facebook_picture_url %>
                 <% avatar_url = current_user.facebook_picture_url %>
                 <%= image_tag avatar_url, class: "avatar-xl" %>
-              <% elsif current_user.avatar  %>
+              <% elsif current_user.avatar.url  %>
                 <% avatar_url = current_user.avatar%>
                 <%= image_tag avatar_url, class: "avatar-xl" %>
               <% else %>

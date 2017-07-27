@@ -1,4 +1,6 @@
-
+<% content_for(:title_tag) do %>
+  Curator -- <%= @book.title %>
+<% end %>
  
 <%#= render "/books/platform-nav" %>
 
@@ -80,19 +82,20 @@
 
      $(document).ready(function(){
 
-     $('#submit').click(function(e) {
-    	// e.preventDefault();
-    	$('#new-convo-modal').modal('toggle'); //or  $('#IDModal').modal('hide');
-    	$('#conversation').load("/books/refreshConvos")
-    	
-    	// return false;
-	});
-      $('#new-convo-submit').click(function(e) {
-    	// e.preventDefault();
-    	// Coding
-    	$('#new-convo-modal-on-existing').modal('toggle'); //or  $('#IDModal').modal('hide');
-    	// return false;
-	});
+	     $('#submit').click(function(e) {
+	    	// e.preventDefault();
+	    	$('#new-convo-modal').modal('toggle'); //or  $('#IDModal').modal('hide');
+	    	// $('#conversation').load("/books/refreshConvos");
+
+	    	// runningConvoID = false;
+	    	// return false;
+		});
+	      $('#new-convo-submit').click(function(e) {
+	    	// e.preventDefault();
+	    	// Coding
+	    	$('#new-convo-modal-on-existing').modal('toggle'); //or  $('#IDModal').modal('hide');
+	    	// return false;
+		});
 
       
 
@@ -199,22 +202,23 @@
 
 			}
 
- 	    $("a.threads").click(function(){
+ 	//     $("a.threads").click(function(){
+ 	//     	console.log('I clicked');
+ 	//     	var topic = $(this).text();
+ 	//     	var convo = $(this).attr('id');
+	 //        // $('#conversation-container').slideUp("slow");
+	 //        $(".posts-container").removeClass('hidden');
+	 //        $("a.threads").removeClass('button-gray');
+	 //        $('.threads').not(this).addClass('button-gray');
+	 //        // $("#post-clickable").text(topic);
+	 //        runningConvoID = convo;
+	 //        console.log(convo);
+	 //        setTimeout(function() {
+	 //        	postRefresh(convo)
+	 //        }, 5000);
+	 //        // running = true;
 
- 	    	var topic = $(this).text();
- 	    	var convo = $(this).attr('id');
-	        // $('#conversation-container').slideUp("slow");
-	        $(".posts-container").removeClass('hidden');
-	        $("a.threads").removeClass('button-gray');
-	        $('.threads').not(this).addClass('button-gray');
-	        // $("#post-clickable").text(topic);
-	        runningConvoID = convo;
-	        setTimeout(function() {
-	        	postRefresh(convo)
-	        }, 5000);
-	        // running = true;
-
-		});
+		// });
 		$('#conversations-clickable').click(function() {
 			/* Act on the event */
 			$('#conversation-container').slideToggle("slow");
@@ -430,6 +434,25 @@
 
 		}	
   
+	$('#conversations').on('click', '.threads', function(event)
+		{
+		    // Your normal onclick code
+		    console.log('I clicked');
+ 	    	var topic = $(this).text();
+ 	    	var convo = $(this).attr('id');
+	        // $('#conversation-container').slideUp("slow");
+	        $(".posts-container").removeClass('hidden');
+	        $("a.threads").removeClass('button-gray');
+	        $('.threads').not(this).addClass('button-gray');
+	        // $("#post-clickable").text(topic);
+	        runningConvoID = convo;
+	        console.log(convo);
+	        setTimeout(function() {
+	        	postRefresh(convo)
+	        }, 5000);
+	        // running = true;
+		});
+
 	// var running = false;
 	var runningConvoID = false;
 	var timeOut = null;

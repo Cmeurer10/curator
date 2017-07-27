@@ -5,9 +5,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4 col-md-offset-2 col-xs-12">
+		<div class="col-md-5 col-md-offset-1 col-xs-12">
 			<p>
-				Stuck on something in your textbook or assigned readings? Probably. The problem you are encountering is not unique. Someone else in the same class, reading the same book may have encountered the same problem and knows the answer! Curator is a platform connecting learners with solutions and reading experience. Just highlight the words or phrases which baffle you, and take in the wisdom of the learners across the globe. 
+				Stuck on something in your textbook or assigned readings? Probably. <span class="home-highlights">The problem you are encountering is not unique.</span> Someone else in the same class, reading the same book may have encountered the same problem and knows the answer! Curator is a platform connecting learners with solutions and reading experience. Just <span class="home-highlights">highlight</span> the words or phrases which baffle you, and take in the wisdom of the learners across the globe. 
 			</p>
 			<div id = "signin-landing">
 			<% if user_signed_in? %>
@@ -19,3 +19,16 @@
 		</div>
 	</div>
 </div>
+
+<% content_for 	:javascript do %>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.home-highlights').click(function(event) {
+				/* Act on the event */
+				$(".home-highlights").css("background-color", "#D7D7D7");
+				$(this).css("background-color", 'pink');
+			});
+		});
+	</script>
+<% end %>

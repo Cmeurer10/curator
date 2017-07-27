@@ -3,7 +3,6 @@
 	 background-image: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 65%), asset_url('jumbotron.jpeg');
 	 background-size: cover;
 	 background-position: center;
-	 height: 100vh;
 }
 
 
@@ -26,6 +25,7 @@
 }
 .conversation-threads-container{
 	display: flex;
+	flex-direction: column;
 	flex-wrap: wrap;
 	margin-bottom: 25px;
 }

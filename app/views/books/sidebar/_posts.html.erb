@@ -1,5 +1,10 @@
 <div id='post-container'>
   <% if !@posts.nil? %>
+      <% @topic = @conversation.topic
+         @topic = @topic.split(' ')
+         @topic = @topic[0,3].push('...') if @topic.length > 4
+         @topic = @topic.join(' ') %>
+         <h3><%= @topic %></h3>
     <% @posts.sort_by(&:votes).reverse.each do |post| %>
       <% if post.flag %>
         <div class="post-card" style="background-color: #f4ecbe;">

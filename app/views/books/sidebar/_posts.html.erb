@@ -19,14 +19,14 @@
             <li><%= link_to "Edit", book_conversation_posts_path(@book, @conversation, post_id: post.id) , remote: true %></li>
             <li><%= link_to 'Delete', book_conversation_post_path(@book, @conversation, post),
 method: :delete, remote: true, data: {confirm: "Are you sure you want to delete this post?"} %></li>
-            <li class="divider"></li>
-            <li>
-              <% if ['admin', 'curator'].include?(current_user.role) || current_user == post.user %>
+            <% if ['admin', 'curator'].include?(current_user.role) %>
+              <li class="divider"></li>
+              <li>
                 <%= link_to(book_conversation_post_flag_path(@book, @conversation, post), remote: true) do %>
                   <p>Flag as Correct</p>
                 <% end %>
-              <% end %>
-            </li>
+              </li>
+            <% end %>
           </ul>
         </div>
       <% end %>

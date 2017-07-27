@@ -9,7 +9,9 @@ class ConversationsController < ApplicationController
       format.html
       format.js
     end
+
     @conversations = policy_scope(Conversation).where(book: params[book:id])
+
   end
 
   # GET /conversations/1
@@ -42,6 +44,7 @@ class ConversationsController < ApplicationController
         # format.html { render partial: "/books/sidebar/conversations", notice: 'Conversation was successfully updated.' }
         # # format.json { render :show, status: :created, location: @conversation.book }
         # format.json { render :show, status: :created, location: "/books/#{@conversation.book_id}" }
+        @conversations = @book.conversations
         format.js { render :index }
       else
         # format.html { render :new }

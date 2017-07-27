@@ -1,22 +1,30 @@
 <div class="jumbotron">
-	<div class="row">
-		<div class="col-md-2 col-md-offset-1 col-xs-12">
-			<%= image_tag "title.png" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-5 col-md-offset-1 col-xs-12">
-			<p>
-				Stuck on something in your textbook or assigned readings? Probably. <span class="home-highlights">The problem you are encountering is not unique.</span> Someone else in the same class, reading the same book may have encountered the same problem and knows the answer! Curator is a platform connecting learners with solutions and reading experience. Just <span class="home-highlights">highlight</span> the words or phrases which baffle you, and take in the wisdom of the learners across the globe. 
-			</p>
-			<div id = "signin-landing">
-			<% if user_signed_in? %>
-				<%= link_to t(".course", default: "Your Courses"), courses_path, class: "btn btn-lg signin-btn" %>
-			<% else %>
-				<%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-lg signin-btn" %>
-			<% end %>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-1 col-xs-12">
+				<%= image_tag "title.png" %>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1 col-xs-12">
+				<p class="home lighter">
+					Stuck on something in your textbook or assigned readings? Probably. <span class="home-highlights" data-toggle="popover" data-placement="top" data-content="You're totally right! How do I answer my question?">The problem you are encountering is not unique.</span> Someone else in the same class, reading the same book may have encountered the same problem and knows the answer! Curator is a platform connecting learners with solutions and reading experience. Just <span class="home-highlights" data-toggle="popover" data-placement="top">highlight</span> the words or phrases which baffle you, and take in the wisdom of the learners across the globe. 
+				</p>
+				<div id="popover_content_wrapper" style="display: none">
+					    	  <% colors =  ["button-yellow", "button-blue", "button-green", "button-purple"] %>
+					    	  <% button_color = colors.sample %>
+					  	   	<button class="btn <%= button_color %>">Test Text</button>
+				</div>
+				<div id = "signin-landing">
+				<% if user_signed_in? %>
+					<%= link_to t(".course", default: "Your Courses"), courses_path, class: "btn btn-lg signin-btn" %>
+				<% else %>
+					<%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-lg signin-btn" %>
+				<% end %>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 </div>
 
@@ -28,6 +36,12 @@
 				/* Act on the event */
 				$(".home-highlights").css("background-color", "#D7D7D7");
 				$(this).css("background-color", 'pink');
+				$(this).popover({
+					html: true,
+					content: function(){
+						return $('#popover_content_wrapper').html();
+					}
+				}); 
 			});
 		});
 	</script>

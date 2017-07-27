@@ -9,8 +9,8 @@ class UserMailer < ApplicationMailer
     @user = user
     @greeting = "Hello"
 
-    mail to: "to@example.org"
-    # mail(to: @user.email, subject: "Welcome to Curator")
+    # mail to: "to@example.org"
+    mail(to: @user.email, subject: "Welcome to Curator")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -18,9 +18,10 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.invite.subject
   #
-  def invite
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
-  end
+  # def invite
+  #   @greeting = "Hi"
+  #
+  #   mail to: "to@example.org"
+  #   mail(to: @user.email, subject: "Invited to Curator")
+  # end
 end

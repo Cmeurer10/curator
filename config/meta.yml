@@ -2,5 +2,5 @@ meta_product_name: "Curator"
 meta_title: "Curator -- Know More"
 meta_description: "Curator seeks to help students of any level know more about the text they are reading.  By using an annotation,
 comment and upvote system, students can get answers to their questions with more context than a simple Internet search would provide"
-meta_image: "jumbotron.jpeg"                       # should exist in `app/assets/images/`
+meta_image: "fb-meta.png"                       # should exist in `app/assets/images/`
 twitter_account: "@owen_klumb"   # required for Twitter Cards

@@ -341,6 +341,7 @@
 
 		$(".highlight").click(function(e){
 			$(".highlight").css("background-color", "#D7D7D7");
+			$(".hightlighted").css("background-color", "#D7D7D7");
 			$(this).css("background-color", "pink");
 			convoElements = getConvoElements(this);
 			$(".convo-instance").removeClass('active-convo');
@@ -414,6 +415,7 @@
 				);
 
 				$(".hightlighted").click(function(e){
+					$(".highlight").css("background-color", "#D7D7D7");
 					$(".hightlighted").css("background-color", "#D7D7D7");
 					$(this).css("background-color", "pink");
 					$(".convo-instance").removeClass('active-convo');

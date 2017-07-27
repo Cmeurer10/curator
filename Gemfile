@@ -38,6 +38,8 @@ gem 'devise_invitable', '~> 1.7.0'
 
 # allows testing of mailers without sending true emails
 gem "letter_opener", group: :development
+# production mailer
+gem 'postmark-rails'
 
 
 group :development, :test do

@@ -77,10 +77,13 @@ class PostsController < ApplicationController
   def upvote
     authorize @post
     respond_to do |format|
-      @post.votes += 1
-      if @post.save!
-        @post = Post.new
-        format.js { render :index }
+      unless @post.upvoters.include?(current_user.id)
+        @post.upvoters.push(current_user.id)
+        @post.votes += 1
+        if @post.save!
+          @post = Post.new
+          format.js { render :index }
+        end
       end
     end
   end

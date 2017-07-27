@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20170727015859) do
     t.integer  "user_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.string   "upvoters",                                     array: true
+    t.string   "upvoters",        default: [],                 array: true
     t.index ["conversation_id"], name: "index_posts_on_conversation_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(version: 20170727015859) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
-    t.string   "upvoted",                                                 array: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree

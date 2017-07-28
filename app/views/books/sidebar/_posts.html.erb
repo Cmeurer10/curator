@@ -41,7 +41,7 @@ method: :delete, remote: true, data: {confirm: "Are you sure you want to delete 
               <% avatar_url = post.user.facebook_picture_url %>
               <%= image_tag avatar_url, class: "avatar-large" %>
             <% elsif post.user.avatar.url  %>
-              <% avatar_url = current_user.avatar%>
+              <% avatar_url = current_user.avatar.url%>
               <%= image_tag avatar_url, class: "avatar-large" %>
             <% else %>
               <div class="default-avatar background-default" >

@@ -17,6 +17,7 @@ class CuratorshipsController < ApplicationController
     @curatorship = Curatorship.new(curatorship_params)
     @curatorship.course = @course
     @curatorship.user.role = 'curator'
+    @curatorship.user.save!
 
     if @curatorship.save
       same_course_enrollment = Enrollment.where(user: @curatorship.user, course: @course).first

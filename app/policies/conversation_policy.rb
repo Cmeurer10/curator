@@ -37,6 +37,6 @@ class ConversationPolicy < ApplicationPolicy
   end
 
   def destroy?
-    curator_or_admin?
+    curator_or_admin? || record.user_id == user.id
   end
 end

@@ -22,6 +22,7 @@
 				<div class="threads-container">
 					<div class="title">
 						<h2 id ="conversations-clickable">Conversations</h2>
+						<div class="btn hidden" id='new-convo-on-existing'><i class="fa fa-plus" aria-hidden="true"></i></div>
 					</div>
 					<div id="conversations">
 						<%= render "/books/sidebar/conversations" %>
@@ -93,6 +94,7 @@
 	      $('#new-convo-submit').click(function(e) {
 	    	// e.preventDefault();
 	    	// Coding
+	    	// $('#new-convo-submit').load("/books/refreshConvos");
 	    	$('#new-convo-modal-on-existing').modal('toggle'); //or  $('#IDModal').modal('hide');
 	    	// return false;
 		});
@@ -365,11 +367,11 @@
 
 
 
-		$('#new-convo-on-existing').click(function(){
-			var parent_index = $('.active-convo').attr('id').slice(9,);
-			$('#conversation_parent_id').val(parent_index);
-			$('#new-convo-modal-on-existing').modal('show');
-		});
+		// $('#new-convo-on-existing').click(function(){
+		// 	var parent_index = $('.active-convo').attr('id').slice(9,);
+		// 	$('#conversation_parent_id').val(parent_index);
+		// 	$('#new-convo-modal-on-existing').modal('show');
+		// });
 
 	});
 
@@ -438,8 +440,6 @@
   
 	$('#conversations').on('click', '.threads', function(event)
 		{
-		    // Your normal onclick code
-		    console.log('I clicked');
  	    	var topic = $(this).text();
  	    	var convo = $(this).attr('id');
 	        // $('#conversation-container').slideUp("slow");
@@ -453,6 +453,12 @@
 	        	postRefresh(convo)
 	        }, 5000);
 	        // running = true;
+		});
+	$('#new-convo-on-existing').click(function(){
+
+			var parent_index = $('.active-convo').attr('id').slice(9,);
+			$('#conversation_parent_id').val(parent_index);
+			$('#new-convo-modal-on-existing').modal('show');
 		});
 
 	// var running = false;
@@ -475,13 +481,13 @@
 		  });
 		}}
 
-		  function convoRefresh() {{
+	  function convoRefresh() {{
 
-		  $.ajax({
-		    type: "GET",
-		    url: "/books/<%= @book.id %>/conversations/"
-		  	});
-		  };}
+	  $.ajax({
+	    type: "GET",
+	    url: "/books/<%= @book.id %>/conversations/"
+	  	});
+	  };}
 
 
 
